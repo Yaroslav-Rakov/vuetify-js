@@ -71,6 +71,7 @@
 <script>
 import LoginComponent from "./components/Login.vue";
 import HomeComponent from "./components/Home.vue";
+import store from "./store/store.js";
 
 export default {
   components: { LoginComponent, HomeComponent },
@@ -81,8 +82,16 @@ export default {
   },
   methods: {
     resetToken() {
-      (this.$store.state.token = ""), (localStorage.token = "");
+      this.$store.state.token = "",
+      localStorage.token = "";
+      store.getters.GET_AUTH_DATA.name = '';
     },
+    created(){
+
+    store.dispatch('ACTION_AUTH_DATA');
+
+},
+
   },
 };
 </script>
