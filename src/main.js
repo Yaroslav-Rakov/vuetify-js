@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import Vuelidate from 'vuelidate'
-import Login from './views/Login.vue'
+import LoginComponent from './components/Login.vue'
 
 
 Vue.use(Vuelidate)
@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 // Register component globally
 Vue.component(
-    'LoginComponent', Login
+    'LoginComponent', LoginComponent
   
 )
 

@@ -60,7 +60,9 @@
                     <v-col>
                         <v-sheet min-height="70vh"
                                  rounded="lg">
+                            <div v-if="this.$route.path == '/login'">                    
                             <LoginComponent />
+                            </div>
                         </v-sheet>
                     </v-col>
                 </v-row>
@@ -71,9 +73,9 @@
 
 
 <script>
-    import LoginComponent from './views/Login.vue'
+    import LoginComponent from './components/Login.vue'
     export default {
-        component: { LoginComponent },
+        components: { LoginComponent },
         data: () => ({
             links: [
                 'Dashboard',
