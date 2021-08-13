@@ -4,7 +4,7 @@
       <v-container>
         <v-row>
           <v-col class="d-flex justify-center" cols="12">
-            <h1>Hello {{ this.userName }}</h1>
+            <h1>Hello {{ usr }}</h1>
           </v-col>
         </v-row>
       </v-container>
@@ -13,23 +13,25 @@
 </template>
 
 <script>
-// import store from "../store/store.js";
-import { mapGetters } from "vuex";
+import store from "../store/store.js";
+// import { mapGetters, mapActions } from "vuex";
 export default {
   name: "HomeComponent",
+created(){
 
-  created() {
+    store.dispatch('ACTION_AUTH_DATA');
 
-  },
+},
+ computed: {
+   usr() {
+     return store.getters.GET_AUTH_DATA.name;
+   }
 
-  computed: {
-    ...mapGetters(["GET_LOGIN"]),
- 
-  },
+ },
 
   data() {
     return {
-      userName: localStorage.name + '!',
+      
     };
   },
 };

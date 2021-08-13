@@ -10,12 +10,9 @@ export default new Vuex.Store({
     userAuth: {},
     getPosts: {},
     getPost: {},
-    getUser: {},
     createPost: {},
     userLogin: {},
-    authToken: '',
-    test: '',
-    userRegister: ''
+    userRegister: {}
   },
   mutations: {
     SET_AUTH_DATA(state, response) {
@@ -78,8 +75,8 @@ export default new Vuex.Store({
   },
   getters: {
     GET_AUTH_DATA(state) {
-      console.log(state.userDataVuex);
-      return state.userDataVuex;
+      console.log(state.userAuth);
+      return state.userAuth;
     },
     GET_LOGIN(state) {
       console.log(state.userLogin);

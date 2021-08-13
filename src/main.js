@@ -25,5 +25,8 @@ new Vue({
   router,
   store,
   vuetify,
+  created() {
+    // store.dispatch('ACTION_AUTH_DATA');
+  },
   render: h => h(App)
 }).$mount('#app')
