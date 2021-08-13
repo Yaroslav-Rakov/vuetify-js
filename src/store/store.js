@@ -16,9 +16,9 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_AUTH_DATA(state, response) {
-      state.userAuth = response,
-      localStorage.name = response.name,
-      localStorage.email = response.email
+      state.userAuth = response
+      // localStorage.name = response.name,
+      // localStorage.email = response.email
     },
     SET_LOGIN(state, response) {
       state.userLogin = response
