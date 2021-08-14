@@ -17,8 +17,6 @@ export default new Vuex.Store({
     limit: 7,
     skip: 0,
     currentPage: 1
-    
-   
   },
     mutations: {
         CURRENT_PAGE_LIM(state,  limit ) {
@@ -29,15 +27,8 @@ export default new Vuex.Store({
         },
         NEW_LIMIT(state, limit) {
             state.limit += limit
-},
-        NEXT_SKIP(state, skip) {
-            state.skip += skip
-
         },
-        PREVIOUS_SKIP(state, skip) {
-            state.skip -= skip
 
-        },
     SET_AUTH_DATA(state, response) {
       state.userAuth = response
       // localStorage.name = response.name,

@@ -5,9 +5,8 @@
     "\\src\\components",
     "\\src\\plugins",
     "\\src\\router",
-    "\\src\\store",
-    "\\src\\views"
+    "\\src\\store"
   ],
-  "SelectedNode": "\\src\\App.vue",
+  "SelectedNode": "\\src\\store\\store.js",
   "PreviewInSolutionExplorer": false
 }
