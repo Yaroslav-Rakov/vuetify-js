@@ -16,7 +16,8 @@ export default new Vuex.Store({
     allPostsLength: 0,
     limit: 7,
     skip: 0,
-    currentPage: 1
+    currentPage: 1,
+    search: ''
   },
     mutations: {
         CURRENT_PAGE_LIM(state,  limit ) {
