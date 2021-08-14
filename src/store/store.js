@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import request from'./config.js'
+
 
 Vue.use(Vuex)
 
@@ -34,20 +35,21 @@ export default new Vuex.Store({
   },
   actions: {
     ACTION_REGISTER_DATA({ commit, state }) {
-      axios
-        .post("https://nodejs-test-api-blog.herokuapp.com/api/v1/users", state.userRegister)
+   request
+        .post("users", state.userRegister)
         .then((response) => {
-          commit('SET_REGISTER_DATA', response.data.token);
+          commit('SET_REGISTER_DATA', response.data);
         })
         .catch((error) => {
           console.error("There was an error!", error);
         });
-    },
+      },
+
     ACTION_LOGIN({ commit, state }) {
       return new Promise((resolve, reject) => {
 
-      axios
-        .post("https://nodejs-test-api-blog.herokuapp.com/api/v1/auth", state.userLogin)
+   request
+        .post("auth", state.userLogin)
         .then((response) => {
           commit('SET_TOKEN', response.data.token);
           resolve({ name: 'Home' });
@@ -59,15 +61,12 @@ export default new Vuex.Store({
       });
 
     },
-    ACTION_AUTH_DATA({ commit, state }) {
+    ACTION_AUTH_DATA({ commit }) {
       console.log('ACTION_AUTH_DATA works');
       if (localStorage.token) {
-        axios.defaults.headers.common["Authorization"] = localStorage.token;
-        console.log('Token: ' + axios.defaults.headers.common["Authorization"]);
-
-        axios.get('https://nodejs-test-api-blog.herokuapp.com/api/v1/auth/user', {
+        request.get('auth/user', {
           headers: { authorization: localStorage.token },
-        }).then(response => { commit('SET_AUTH_DATA', response.data), state.authToken = localStorage.token })
+        }).then(response => { commit('SET_AUTH_DATA', response.data) })
       }
     },
   },

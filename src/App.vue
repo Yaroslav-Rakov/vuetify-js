@@ -1,31 +1,27 @@
 <template>
   <v-app id="inspire">
     <v-app-bar app color="white" flat>
-      <v-container class="py-0 fill-height">
-        <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
-        <v-btn to="/" text>Home</v-btn>
-        <v-btn to="/posts" text>Posts</v-btn>
-        <v-btn v-if="!this.$store.state.token" to="/login" text>Login</v-btn>
-        <v-btn
-          v-else-if="this.$store.state.token"
-          @click.native="resetToken"
-          to="/login"
-          text
-          >Log Out</v-btn
-        >
+        <v-container class="py-0 fill-height">
+            <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
+            <v-btn to="/" text>Home</v-btn>
+            <v-btn to="/posts" text>Posts</v-btn>
+            <v-btn v-if="!this.$store.state.token" to="/login" text>Login</v-btn>
+            <v-btn v-if="!this.$store.state.token" to="/register" text>Register</v-btn>
+            <v-btn v-else-if="this.$store.state.token"
+                   @click.native="resetToken"
+                   to="/login"
+                   text>Log Out</v-btn>
 
-        <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-        <v-responsive max-width="260">
-          <v-text-field
-            dense
-            flat
-            hide-details
-            rounded
-            solo-inverted
-          ></v-text-field>
-        </v-responsive>
-      </v-container>
+            <v-responsive max-width="260">
+                <v-text-field dense
+                              flat
+                              hide-details
+                              rounded
+                              solo-inverted></v-text-field>
+            </v-responsive>
+        </v-container>
     </v-app-bar>
 
     <v-main class="grey lighten-3">
@@ -52,14 +48,17 @@
           </v-col>
 
           <v-col>
-            <v-sheet min-height="70vh" rounded="lg">
-              <div v-if="this.$route.path == '/login'">
-                <LoginComponent />
-              </div>
-              <div v-if="this.$route.path == '/'">
-                <HomeComponent />
-              </div>
-            </v-sheet>
+              <v-sheet min-height="70vh" rounded="lg">
+                  <div v-if="this.$route.path == '/login'">
+                      <LoginComponent />
+                  </div>
+                  <div v-if="this.$route.path == '/register'">
+                      <RegisterComponent />
+                  </div>
+                  <div v-if="this.$route.path == '/'">
+                      <HomeComponent />
+                  </div>
+              </v-sheet>
           </v-col>
         </v-row>
       </v-container>
@@ -70,11 +69,13 @@
 
 <script>
 import LoginComponent from "./components/Login.vue";
+import RegisterComponent from "./components/Register.vue";
 import HomeComponent from "./components/Home.vue";
 import store from "./store/store.js";
 
 export default {
-  components: { LoginComponent, HomeComponent },
+  components: { LoginComponent, HomeComponent, RegisterComponent
+      },
   data() {
     return {
       
