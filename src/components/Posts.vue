@@ -79,7 +79,7 @@
                 persistentHint: false,
                 loading: false,
                 flat: false,
-                counterEn: true,
+                counterEn: false,
                 counter: 0,
                 dense: false,
             }
