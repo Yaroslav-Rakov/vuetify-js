@@ -20,7 +20,7 @@
                                           :counter="counterEn ? counter : false"
                                           :dense="dense"></v-text-field>
                         </v-responsive>
-                        <v-card class="mx-auto" v-for="(item, index) in filteredList" :key="index">
+                        <v-card class="mx-auto" v-for="(item, index) in filteredListSearch" :key="index">
                             <v-card-title>{{item.title}}</v-card-title>
                             <v-card-text>{{item.description}}</v-card-text>
                             <v-card-actions class="justify-space-between">
@@ -79,15 +79,15 @@
                 persistentHint: false,
                 loading: false,
                 flat: false,
-                counterEn: false,
+                counterEn: true,
                 counter: 0,
                 dense: false,
             }
         },
 
         created() {
-            this.ACTION_POSTS_DATA;
             this.ACTION_POSTS_DATA_LENGTH;
+            this.ACTION_POSTS_DATA;
             console.log('Current page: ' + this.page);
 
         },
@@ -95,19 +95,29 @@
         computed: {
             ...mapActions(["ACTION_POSTS_DATA","ACTION_POSTS_DATA_LENGTH"]),
 
-
-
             filteredList() {
                 return this.GET_POSTS_DATA().filter(post => {
                     let checkNull = this.search === null ? this.GET_POSTS_DATA() : post.title.toLowerCase().includes(this.search.toLowerCase())
                     return checkNull
                 })
+            },
+            filteredListSearch() {
+                if (this.search !== null && this.search.length > 0) {
+                    return this.GET_POSTS_SEARCH().filter(post => {
+                        let checkNull = this.search === null ? this.filteredList : post.title.toLowerCase().includes(this.search.toLowerCase())
+                        return checkNull
+                    })
+                } else {
+
+                   return this.filteredList
+
+                }
             }
  
         },
 
         methods: {
-            ...mapGetters(["GET_POSTS_DATA"]),
+            ...mapGetters(["GET_POSTS_DATA", "GET_POSTS_SEARCH"]),
 
     //  Load posts by button
     //            

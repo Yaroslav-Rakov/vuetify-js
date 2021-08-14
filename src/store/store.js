@@ -14,6 +14,7 @@ export default new Vuex.Store({
     userLogin: {},
     userRegister: {},
     allPostsLength: 0,
+    allPostsSearch: [],
     limit: 7,
     skip: 0,
     currentPage: 1,
@@ -51,8 +52,11 @@ export default new Vuex.Store({
           state.allPosts = response
         },
         SET_POSTS_DATA_LENGTH(state, response) {
-            state.allPostsLength = Math.ceil(response.length/state.limit)
+            state.allPostsLength = Math.ceil(response.length / state.limit)
+            state.allPostsSearch = response
+
         },
+ 
   },
     actions: {
         ACTION_POSTS_DATA({ commit, state }) {
@@ -123,6 +127,14 @@ export default new Vuex.Store({
       GET_POSTS_DATA(state) {
           console.log(state.allPosts);
           return state.allPosts;
+      },
+      GET_POSTS_LENGTH(state) {
+          console.log(state.allPostsLength);
+          return state.allPostsLength;
+      },
+      GET_POSTS_SEARCH(state) {
+          console.log(state.allPostsSearch);
+          return state.allPostsSearch;
       }
   }
 })
