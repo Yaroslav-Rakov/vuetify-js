@@ -9,13 +9,16 @@ export default new Vuex.Store({
   state: {
     token: window.localStorage.token,
     userAuth: {},
-    getPosts: {},
-    getPost: {},
+    allPosts: {},
     createPost: {},
     userLogin: {},
-    userRegister: {}
+    userRegister: {},
+    limit: 7
   },
-  mutations: {
+    mutations: {
+        NEW_LIMIT(state, response) {
+        state.limit += response
+},
     SET_AUTH_DATA(state, response) {
       state.userAuth = response
       // localStorage.name = response.name,
@@ -30,10 +33,21 @@ export default new Vuex.Store({
       console.log('SET_TOKEN state', state);
     },
     SET_REGISTER_DATA(state, response) {
-      state.userRegister = response
-    },
+        state.userRegister = response
+        state.userLogin = response
+      },
+      SET_POSTS_DATA(state, response) {
+          state.allPosts = response
+      },
   },
-  actions: {
+    actions: {
+        ACTION_POSTS_DATA({ commit, state }) {
+            console.log('ACTION_POSTS_DATA works');
+            request.get("posts?limit="+state.limit)
+                .then((response) => {
+                    commit('SET_POSTS_DATA', response.data)
+                });
+        },
     ACTION_REGISTER_DATA({ commit, state }) {
    request
         .post("users", state.userRegister)
@@ -84,6 +98,10 @@ export default new Vuex.Store({
     GET_REGISTER_DATA(state) {
       console.log(state.userRegister);
       return state.userRegister;
-    }
+      },
+      GET_POSTS_DATA(state) {
+          console.log(state.allPosts);
+          return state.allPosts;
+      }
   }
 })

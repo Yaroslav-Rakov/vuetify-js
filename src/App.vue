@@ -58,6 +58,9 @@
                   <div v-if="this.$route.path == '/'">
                       <HomeComponent />
                   </div>
+                  <div v-if="this.$route.path == '/posts'">
+                      <PostsComponent />
+                  </div>
               </v-sheet>
           </v-col>
         </v-row>
@@ -68,13 +71,14 @@
 
 
 <script>
-import LoginComponent from "./components/Login.vue";
+import PostsComponent from "./components/Posts.vue";
 import RegisterComponent from "./components/Register.vue";
+import LoginComponent from "./components/Login.vue";
 import HomeComponent from "./components/Home.vue";
 import store from "./store/store.js";
 
 export default {
-  components: { LoginComponent, HomeComponent, RegisterComponent
+  components: { LoginComponent, HomeComponent, RegisterComponent, PostsComponent
       },
   data() {
     return {
