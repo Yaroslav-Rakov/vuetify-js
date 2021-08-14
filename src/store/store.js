@@ -9,16 +9,35 @@ export default new Vuex.Store({
   state: {
     token: window.localStorage.token,
     userAuth: {},
-    allPosts: {},
+    allPosts: [],
     createPost: {},
     userLogin: {},
     userRegister: {},
-    limit: 7
+    allPostsLength: 0,
+    limit: 7,
+    skip: 0,
+    currentPage: 1
+    
+   
   },
     mutations: {
-        NEW_LIMIT(state, response) {
-        state.limit += response
+        CURRENT_PAGE_LIM(state,  limit ) {
+            state.limit =  limit
+        },
+        CURRENT_PAGE_SKIP(state, skip ) {
+                state.skip =  skip 
+        },
+        NEW_LIMIT(state, limit) {
+            state.limit += limit
 },
+        NEXT_SKIP(state, skip) {
+            state.skip += skip
+
+        },
+        PREVIOUS_SKIP(state, skip) {
+            state.skip -= skip
+
+        },
     SET_AUTH_DATA(state, response) {
       state.userAuth = response
       // localStorage.name = response.name,
@@ -38,14 +57,24 @@ export default new Vuex.Store({
       },
       SET_POSTS_DATA(state, response) {
           state.allPosts = response
-      },
+        },
+        SET_POSTS_DATA_LENGTH(state, response) {
+            state.allPostsLength = Math.ceil(response.length/state.limit)
+        },
   },
     actions: {
         ACTION_POSTS_DATA({ commit, state }) {
             console.log('ACTION_POSTS_DATA works');
-            request.get("posts?limit="+state.limit)
+            request.get("posts?limit="+state.limit+'&skip='+state.skip)
                 .then((response) => {
                     commit('SET_POSTS_DATA', response.data)
+                });
+        },
+        ACTION_POSTS_DATA_LENGTH({ commit }) {
+            console.log('ACTION_POSTS_DATA works');
+            request.get("posts?limit=1000000000")
+                .then((response) => {
+                    commit('SET_POSTS_DATA_LENGTH', response.data)
                 });
         },
     ACTION_REGISTER_DATA({ commit, state }) {
