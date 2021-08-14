@@ -11,7 +11,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    // meta: { requiresAuth: true }
   },
   {
     path: '/about',
@@ -35,7 +34,9 @@ const routes = [
       path: '/posts',
       name: 'Posts',
 
-      component: () => import(/* webpackChunkName: "posts" */ '../components/Posts.vue')
+        component: () => import(/* webpackChunkName: "posts" */ '../components/Posts.vue'),
+      meta: { requiresAuth: true }
+
   }
 ]
 

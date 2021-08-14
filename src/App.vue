@@ -4,7 +4,7 @@
         <v-container class="py-0 fill-height">
             <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
             <v-btn to="/" text>Home</v-btn>
-            <v-btn to="/posts" text>Posts</v-btn>
+            <v-btn v-if="this.$store.state.token" to="/posts" text>Posts</v-btn>
             <v-btn v-if="!this.$store.state.token" to="/login" text>Login</v-btn>
             <v-btn v-if="!this.$store.state.token" to="/register" text>Register</v-btn>
             <v-btn v-else-if="this.$store.state.token"
