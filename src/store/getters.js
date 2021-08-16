@@ -1,22 +1,18 @@
 export default {
 
     GET_AUTH_DATA(state) {
-        console.log(state.userAuth);
-        return state.userAuth;
+        console.log(state.userAuthData);
+        return state.userAuthData;
     },
-    GET_LOGIN(state) {
-        console.log(state.userLogin);
-        return state.userLogin;
-    },
-    GET_POSTS_DATA(state) {
-        console.log(state.allPosts);
-        return state.allPosts;
+    GET_POSTS_PAGE(state) {
+        console.log(state.postsByPage);
+        return state.postsByPage;
     },
     GET_POSTS_LENGTH(state) {
         console.log(state.allPostsLength);
         return state.allPostsLength;
     },
-    GET_POSTS_SEARCH(state) {
+    GET_ALLPOSTS_SEARCH(state) {
         console.log(state.allPostsSearch);
         return state.allPostsSearch;
     }

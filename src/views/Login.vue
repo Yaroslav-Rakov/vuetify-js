@@ -51,7 +51,7 @@
                           block
                           :disabled="!valid"
                           color="success"
-                          @click="validate, login()"
+                          @click="login"
                         >
                           Login
                         </v-btn>
@@ -89,27 +89,12 @@ export default {
     login() {
       if (this.$refs.loginForm.validate()) {
         console.log("login clicked");
-        this.$store.commit("SET_LOGIN", this.userData);
-        this.$store.dispatch("ACTION_LOGIN").then(path => { 
+        this.$store.dispatch("ACTION_LOGIN", this.userData).then(path => { 
         this.$router.push(path);
       });
       }
     },
 
-    register() {
-      console.log("register clicked");
-      this.$store.commit("SET_REGISTER_DATA", this.userRegister);
-      this.$store.dispatch("ACTION_REGISTER_DATA");
-      this.$store.dispatch("ACTION_LOGIN").then(path => {
-            this.$router.push(path);
-        });
-    },
-
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
-      }
-    },
     reset() {
       this.$refs.form.reset();
     },

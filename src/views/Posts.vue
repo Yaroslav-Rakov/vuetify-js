@@ -92,32 +92,32 @@ export default {
   },
 
   created() {
-    this.ACTION_POSTS_DATA_SEARCH;
-    this.ACTION_POSTS_DATA;
+    this.ACTION_ALLPOSTS_SEARCH;
+    this.ACTION_POSTS_PAGE;
     console.log("Current page: " + this.page);
   },
 
   computed: {
-    ...mapActions(["ACTION_POSTS_DATA", "ACTION_POSTS_DATA_SEARCH"]),
+    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
 
     paginationLength() {
       
-      return Math.ceil(this.GET_POSTS_SEARCH().length / this.postsNumber);
+      return Math.ceil(this.GET_ALLPOSTS_SEARCH().length / this.postsNumber);
       
     },
 
     filteredList() {
-      return this.GET_POSTS_DATA().filter((post) => {
+      return this.GET_POSTS_PAGE().filter((post) => {
         let checkNull =
           this.search === null
-            ? this.GET_POSTS_DATA()
+            ? this.GET_POSTS_PAGE()
             : post.title.toLowerCase().includes(this.search.toLowerCase());
         return checkNull;
       });
     },
     filteredListSearch() {
       if (this.search !== null && this.search.length > 0) {
-        return this.GET_POSTS_SEARCH().filter((post) => {
+        return this.GET_ALLPOSTS_SEARCH().filter((post) => {
           let checkNull =
             this.search === null
               ? this.filteredList
@@ -131,11 +131,11 @@ export default {
   },
 
   methods: {
-    ...mapGetters(["GET_POSTS_DATA", "GET_POSTS_SEARCH"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
 
     myInput() {
       console.log("Current page: " + this.page);
-      this.$store.dispatch("ACTION_POSTS_DATA", this.page);
+      this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
     },
   },
 };

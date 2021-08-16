@@ -90,7 +90,7 @@ export default {
     resetToken() {
       this.$store.state.token = "",
       localStorage.token = "";
-      store.commit("SET_AUTH_DATA", null);
+      // store.commit("SET_AUTH_DATA", null);
     },
     created(){
 

@@ -11,13 +11,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: window.localStorage.token,
-    userAuth: [],
-    allPosts: [],
-    createPost: {},
-    userLogin: {},
+    userAuthData: [],
+    postsByPage: [],
     allPostsLength: null,
-    allPostsSearch: [],
-    limit: 7
+    allPostsSearch: []
   },
   mutations,
   actions,

@@ -2,18 +2,19 @@ import api from './api.js'
 
 export default {
 
-    ACTION_POSTS_DATA({ commit }, page) {
+    ACTION_POSTS_PAGE({ commit }, page) {
+        let limit = 7;
         console.log('ACTION_POSTS_DATA works');
-        api.get("posts?limit=" + 7 + '&skip=' + (page - 1) * 7)
+        api.get("posts?limit=" + limit + '&skip=' + (page - 1) * limit)
             .then((response) => {
-                commit('SET_POSTS_DATA', response.data)
+                commit('SET_POSTS_PAGE', response.data)
             });
     },
-    ACTION_POSTS_DATA_SEARCH({ commit }) {
+    ACTION_ALLPOSTS_SEARCH({ commit }) {
         console.log('ACTION_POSTS_DATA works');
         api.get("posts?limit=1000000000")
             .then((response) => {
-                commit('SET_POSTS_DATA_SEARCH', response.data)
+                commit('SET_ALLPOSTS_SEARCH', response.data)
             });
     },
     ACTION_REGISTER_DATA(commit, user) {
@@ -31,10 +32,10 @@ export default {
         });
     },
 
-    ACTION_LOGIN({ commit, state }) {
+    ACTION_LOGIN({ commit }, user) {
         return new Promise((resolve, reject) => {
             api
-                .post("auth", state.userLogin)
+                .post("auth", user)
                 .then((response) => {
                     commit('SET_TOKEN', response.data.token);
                     resolve({ name: 'Home' });
