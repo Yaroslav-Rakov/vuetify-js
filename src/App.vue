@@ -75,8 +75,8 @@ import PostsComponent from "./views/Posts.vue";
 import RegisterComponent from "./views/Register.vue";
 import LoginComponent from "./views/Login.vue";
 import HomeComponent from "./views/Home.vue";
-import store from "./store/store.js";
-// import auth from "./store/auth.js";
+    import store from "./store/store.js";
+    import { clearAccessToken } from "./store/auth.js";
 
 export default {
   components: { LoginComponent, HomeComponent, RegisterComponent, PostsComponent
@@ -88,15 +88,8 @@ export default {
   },
   methods: {
     resetToken() {
-      this.$store.state.token = "",
-      localStorage.token = "";
-
-      // auth.clearAccessToken;
-
-      // store.getters.GET_AUTH_DATA.name = '';
-      // this.$store.state.token = "",
-      // auth.clearAccessToken;
-      // // store.commit('SET_AUTH_DATA', []);
+          this.$store.state.token = "",
+              clearAccessToken();
     },
     created(){
 

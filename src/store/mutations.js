@@ -8,7 +8,6 @@ export default {
       },
       SET_TOKEN(state, response) {
         state.token = response
-        // localStorage.setItem('token', response)
         setAccessToken(response)
         
         console.log('SET_TOKEN state', state);

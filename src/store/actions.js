@@ -1,4 +1,6 @@
 import api from './api.js'
+import { getAccessToken } from './auth.js'
+
 
 export default {
 
@@ -49,9 +51,9 @@ export default {
     },
     ACTION_AUTH_DATA({ commit }) {
         console.log('ACTION_AUTH_DATA works');
-        if (localStorage.token) {
+        if (getAccessToken()) {
             api.get('auth/user', {
-                headers: { authorization: localStorage.token },
+                headers: { authorization: getAccessToken() },
             }).then(response => { commit('SET_AUTH_DATA', response.data) })
         }
     },

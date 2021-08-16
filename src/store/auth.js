@@ -3,7 +3,7 @@ export const ACCESS_TOKEN_KEY = 'token';
 
 
    export function getAccessToken() {
-        return localStorage.token
+       return localStorage.getItem(ACCESS_TOKEN_KEY)
     }
     
     export function clearAccessToken() {
