@@ -1,3 +1,6 @@
+import {setAccessToken} from './auth.js'
+
+
 export default {
 
     SET_AUTH_DATA(state, response) {
@@ -5,7 +8,9 @@ export default {
       },
       SET_TOKEN(state, response) {
         state.token = response
-        localStorage.token = response
+        // localStorage.setItem('token', response)
+        setAccessToken(response)
+        
         console.log('SET_TOKEN state', state);
       },
       SET_POSTS_PAGE(state, response) {

@@ -17,22 +17,21 @@ import store from "../store/store.js";
 // import { mapGetters, mapActions } from "vuex";
 export default {
   name: "HomeComponent",
-created(){
-
-    store.dispatch('ACTION_AUTH_DATA');
-
-},
- computed: {
-   usr() {
-     return store.getters.GET_AUTH_DATA.name;
-   }
-
- },
+  created() {
+    store.dispatch("ACTION_AUTH_DATA");
+  },
+  computed: {
+    usr() {
+      if (store.state.token) {
+        return store.getters.GET_AUTH_DATA.name;
+      } else {
+        return ''
+      }
+    },
+  },
 
   data() {
-    return {
-      
-    };
+    return {};
   },
 };
 </script>
