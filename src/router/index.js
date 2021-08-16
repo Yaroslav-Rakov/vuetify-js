@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../components/Home.vue'
+import Home from '../views/Home.vue'
 import store from '../store/store.js'
 
 
@@ -22,19 +22,19 @@ const routes = [
         path: '/login',
         name: 'Login',
 
-        component: () => import(/* webpackChunkName: "login" */ '../components/Login.vue')
+        component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
     },
     {
         path: '/register',
         name: 'Register',
 
-        component: () => import(/* webpackChunkName: "register" */ '../components/Register.vue')
+        component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
     },
     {
       path: '/posts',
       name: 'Posts',
 
-        component: () => import(/* webpackChunkName: "posts" */ '../components/Posts.vue'),
+        component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
       meta: { requiresAuth: true }
 
   }

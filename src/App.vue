@@ -71,10 +71,10 @@
 
 
 <script>
-import PostsComponent from "./components/Posts.vue";
-import RegisterComponent from "./components/Register.vue";
-import LoginComponent from "./components/Login.vue";
-import HomeComponent from "./components/Home.vue";
+import PostsComponent from "./views/Posts.vue";
+import RegisterComponent from "./views/Register.vue";
+import LoginComponent from "./views/Login.vue";
+import HomeComponent from "./views/Home.vue";
 import store from "./store/store.js";
 
 export default {
@@ -85,11 +85,12 @@ export default {
       
     };
   },
+
   methods: {
     resetToken() {
       this.$store.state.token = "",
       localStorage.token = "";
-      store.getters.GET_AUTH_DATA.name = '';
+      store.commit("SET_AUTH_DATA", null);
     },
     created(){
 
