@@ -22,15 +22,15 @@ api.interceptors.response.use((response) => {
 }, (error) => {
 
     switch (error.response.status) {
-        case 400:
+/*        case 400:
             alert(error.response.data.error)
-            break;
+            break;*/
         case 401:
             alert(error.response.data.error)
             break;
-        case 404:
+/*        case 404:
             alert(error.response.data.error)
-            break;
+            break;*/
         case 500:
             alert(error.response.data.error)
             break;

@@ -20,37 +20,23 @@ export default {
         console.log(state.search);
         return state.search;
     },
-    GET_FILTERED_POSTS(){
-        console.log(this.checkfunc())
-        return this.filteredListSearch
+    GET_FILTERED_POSTS(state){
+        if (state.search !== null && state.search.length > 0) {
+            return state.allPostsSearch.filter((post) => {
+                return post.title.toLowerCase().includes(state.search.toLowerCase());
+            });
+        } else {
+            return state.postsByPage.filter((post) => {
+                let checkNull =
+                    state.search === null
+                        ? state.postsByPage
+                        : post.title.toLowerCase().includes(state.search.toLowerCase());
+                return checkNull;
+            });
+        }
     },
 
-    checkfunc() {
-        console.log('works')
-    }
-
-    // filteredList(state) {
-    //     return this.GET_POSTS_PAGE.filter((post) => {
-    //       let checkNull =
-    //         state.search === null
-    //           ? this.GET_POSTS_PAGE
-    //           : post.title.toLowerCase().includes(state.search.toLowerCase());
-    //       return checkNull;
-    //     });
-    //   },
-    //   filteredListSearch(state) {
-    //     if (state.search !== null && state.search.length > 0) {
-    //       return this.GET_ALLPOSTS_SEARCH.filter((post) => {
-    //         let checkNull =
-    //           state.search === null
-    //             ? this.filteredList
-    //             : post.title.toLowerCase().includes(state.search.toLowerCase());
-    //         return checkNull;
-    //       });
-    //     } else {
-    //       return this.filteredList;
-    //     }
-    //   },
+   
 
 }
 
