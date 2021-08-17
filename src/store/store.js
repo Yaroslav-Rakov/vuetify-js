@@ -14,7 +14,8 @@ export default new Vuex.Store({
     token: getAccessToken(),
     userAuthData: [],
     postsByPage: [],
-    allPostsSearch: []
+    allPostsSearch: [],
+    search: ""
   },
   mutations,
   actions,

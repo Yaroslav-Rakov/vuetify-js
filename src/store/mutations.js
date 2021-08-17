@@ -17,5 +17,8 @@ export default {
       },
       SET_ALLPOSTS_SEARCH(state, response) {
         state.allPostsSearch = response
+      },
+      search(state, response){
+        state.search = response
       }
 }
