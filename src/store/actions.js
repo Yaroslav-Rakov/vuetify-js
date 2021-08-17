@@ -1,7 +1,6 @@
 import api from './api.js'
 import { getAccessToken } from './auth.js'
 
-
 export default {
 
     ACTION_POSTS_PAGE({ commit }, page) {

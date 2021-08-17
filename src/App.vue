@@ -69,7 +69,7 @@
                 <HomeComponent />
               </div>
               <div v-if="this.$route.path == '/posts'">
-                <PostsComponent />
+                <PostsView />
               </div>
             </v-sheet>
           </v-col>
@@ -81,7 +81,7 @@
 
 
 <script>
-import PostsComponent from "./views/Posts.vue";
+import PostsView from "./views/Posts.vue";
 import RegisterComponent from "./views/Register.vue";
 import LoginComponent from "./views/Login.vue";
 import HomeComponent from "./views/Home.vue";
@@ -93,7 +93,7 @@ export default {
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    PostsComponent,
+    PostsView,
   },
   data() {
     return {};

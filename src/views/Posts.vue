@@ -22,6 +22,7 @@
             :dense="dense"
           ></v-text-field>
         </v-responsive>
+        <!-- <post /> -->
         <v-card
           class="mx-auto"
           v-for="(item, index) in filteredListSearch"
@@ -65,7 +66,7 @@ import { mapActions, mapGetters } from "vuex";
 1; // import store from '../store/store.js'
 
 export default {
-  name: "PostsComponent",
+  name: "PostsView",
 
   data() {
     return {
@@ -92,32 +93,33 @@ export default {
   },
 
   created() {
-    this.ACTION_ALLPOSTS_SEARCH;
-    this.ACTION_POSTS_PAGE;
+    this.$store.dispatch('ACTION_ALLPOSTS_SEARCH')
+    this.$store.dispatch('ACTION_POSTS_PAGE')
     console.log("Current page: " + this.page);
   },
 
   computed: {
-    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
+
 
     paginationLength() {
       
-      return Math.ceil(this.GET_ALLPOSTS_SEARCH().length / this.postsNumber);
+      return Math.ceil(this.GET_ALLPOSTS_SEARCH.length / this.postsNumber);
       
     },
 
     filteredList() {
-      return this.GET_POSTS_PAGE().filter((post) => {
+      return this.GET_POSTS_PAGE.filter((post) => {
         let checkNull =
           this.search === null
-            ? this.GET_POSTS_PAGE()
+            ? this.GET_POSTS_PAGE
             : post.title.toLowerCase().includes(this.search.toLowerCase());
         return checkNull;
       });
     },
     filteredListSearch() {
       if (this.search !== null && this.search.length > 0) {
-        return this.GET_ALLPOSTS_SEARCH().filter((post) => {
+        return this.GET_ALLPOSTS_SEARCH.filter((post) => {
           let checkNull =
             this.search === null
               ? this.filteredList
@@ -131,7 +133,8 @@ export default {
   },
 
   methods: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
+    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
+
 
     myInput() {
       console.log("Current page: " + this.page);
