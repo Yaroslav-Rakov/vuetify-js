@@ -93,8 +93,8 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('ACTION_ALLPOSTS_SEARCH')
-    this.$store.dispatch('ACTION_POSTS_PAGE')
+    this.ACTION_ALLPOSTS_SEARCH()
+    this.ACTION_POSTS_PAGE()
     console.log("Current page: " + this.page);
   },
 
