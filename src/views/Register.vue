@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <v-app>
+
       <v-container>
         <!-- <v-dialog v-model="dialog" max-width="600px" min-width="360px"> -->
+            <v-row>
         <div>
           <v-tabs
             v-model="tab"
@@ -100,11 +100,13 @@
             </v-tab-item>
           </v-tabs>
         </div>
+        </v-row>
       </v-container>
       <!-- </v-dialog> -->
-    </v-app>
-  </div>
+
 </template>
+
+
 
 <script>
 import { mapActions, mapGetters } from "vuex";

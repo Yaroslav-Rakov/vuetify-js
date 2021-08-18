@@ -31,8 +31,9 @@ const routes = [
         component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
     },
     {
-      path: '/posts/:page',
+      path: '/posts',
       name: 'Posts',
+      props: true,
 
         component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
       meta: { requiresAuth: true }

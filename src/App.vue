@@ -4,7 +4,7 @@
       <v-container class="py-0 fill-height my-class">
         <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
         <v-btn color="white" to="/" text>Home</v-btn>
-        <v-btn color="white" v-if="this.$store.state.token" :to="{name: 'Posts', params: {page: this.$store.state.routePage}}" text
+        <v-btn color="white" v-if="this.$store.state.token" :to="{path: '/posts', query: { page: routePage }}" text
           >Posts</v-btn
         >
         <v-btn color="white" v-if="!this.$store.state.token" to="/login" text
@@ -97,11 +97,11 @@ export default {
     };
   },
   computed: {
-    // routePage: {
-    //   get () {
-    //     return this.$route.params.page
-    //   }
-    // },
+    routePage: {
+      get () {
+        return this.$store.state.routePage
+      }
+    },
 
 
   },

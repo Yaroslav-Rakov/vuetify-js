@@ -1,27 +1,31 @@
 <template lang="">
-            <div class="text-center">
           <v-container>
-            <v-row justify="center">
-              <v-col cols="8">
+            <v-row class="my-4" justify="center">
+              <v-col cols="7">
                 <!-- <v-container class="max-width"> -->
                   <v-pagination
                     v-model="page"
-                    class="my-4"
                     :length="paginationLength"
                     @input="myInput()"
                   ></v-pagination>
                 <!-- </v-container> -->
               </v-col>
-              <v-col cols="4">
-                          <v-text-field class="my-4"
-            label="Posts per page"
+              <v-col cols="2">
+          <v-text-field
+            label="Posts on page"
             outlined
-            @input="changePostsNumber()"
+            @input="changePostsNumber"
           ></v-text-field>
                 </v-col>
+                <v-col cols="2">
+                       <v-text-field
+            label="Go to page"
+            outlined
+            @input="goTo"
+          ></v-text-field>
+        </v-col>
             </v-row>
           </v-container>
-        </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -53,13 +57,31 @@ export default {
     myInput() {
       console.log("Current page: " + this.page);
       this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
-      this.$router.push({ path: "", params: { page: this.page } });
-      console.log("Params: " + this.$route.params.page);
+      this.$router.push({ path: "", query: { page: this.page } });
+      console.log("Query: " + this.$route.query.page);
       // console.log("Root data: " + this.$root.params);
     },
-    changePostsNumber(){
-      this.$store.commit("postsPerPage")
-    }
+    changePostsNumber(val) {
+      // this.$store.commit("postsPerPage")
+      if (val.length > 0) {
+
+      this.postsNumber = val
+      this.$store.commit("newLimit", parseInt(val))
+      this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
+
+
+      }
+      console.log(val);
+    },
+        goTo(val) {
+      // this.$store.commit("postsPerPage")
+      if (val.length > 0) {
+
+      this.$store.dispatch("ACTION_POSTS_PAGE", val);
+
+      }
+      console.log(val);
+    },
   },
 };
 </script>

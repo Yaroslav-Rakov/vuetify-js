@@ -17,8 +17,7 @@ export default new Vuex.Store({
     allPostsSearch: [],
     search: "",
     routePage: 1,
-    postsPerPage: 1,
-    pageStart: 1
+    lim: 7
   },
   mutations,
   actions,

@@ -3,10 +3,10 @@ import { getAccessToken } from './auth.js'
 
 export default {
 
-    ACTION_POSTS_PAGE({ commit }, page) {
-        let limit = 7;
+    ACTION_POSTS_PAGE({ commit, state }, page) {
+        // let limit = 7;
         console.log('ACTION_POSTS_DATA works');
-        api.get("posts?limit=" + limit + '&skip=' + (page - 1) * limit)
+        api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
             .then((response) => {
                 commit('SET_POSTS_PAGE', response.data)
             });

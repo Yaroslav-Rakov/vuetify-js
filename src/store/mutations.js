@@ -23,8 +23,8 @@ export default {
   },
   postsPerPage(state, response) {
     state.postsPer = response
-  }
-      // routePage(state, response){
-      //   state.routePage = response
-      // }
+  },
+      newLimit(state, response){
+        state.lim = response
+      }
 }
