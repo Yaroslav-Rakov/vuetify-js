@@ -15,15 +15,16 @@
             label="Posts on page"
             outlined
             @input="changePostsNumber"
-          ></v-text-field>
+          >
+          </v-text-field>
                 </v-col>
-                <v-col cols="2">
+                <!-- <v-col cols="2">
                        <v-text-field
             label="Go to page"
             outlined
             @input="goTo"
           ></v-text-field>
-        </v-col>
+        </v-col> -->
             </v-row>
           </v-container>
 </template>
@@ -63,25 +64,22 @@ export default {
     },
     changePostsNumber(val) {
       // this.$store.commit("postsPerPage")
-      if (val.length > 0) {
-
-      this.postsNumber = val
-      this.$store.commit("newLimit", parseInt(val))
-      this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
-
-
+      if (val.length > 0 && val > 0) {
+        this.postsNumber = val;
+        this.$store.commit("newLimit", parseInt(val));
+        this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
       }
       console.log(val);
     },
-        goTo(val) {
-      // this.$store.commit("postsPerPage")
-      if (val.length > 0) {
+    //     goTo(val) {
+    //   // this.$store.commit("postsPerPage")
+    //   if (val.length > 0 && val > 0) {
 
-      this.$store.dispatch("ACTION_POSTS_PAGE", val);
+    //    this.$store.dispatch("ACTION_POSTS_PAGE", val)
 
-      }
-      console.log(val);
-    },
+    //   }
+    //   console.log(val);
+    // },
   },
 };
 </script>
