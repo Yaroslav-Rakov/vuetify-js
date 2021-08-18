@@ -3,7 +3,7 @@
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
         <SearchComponent />
-        <PostsComponent />
+        <PostsComponent @clicked="onClickChild"/>
         <v-spacer></v-spacer>
         <PaginationComponent />
       </v-col>
@@ -29,10 +29,18 @@ export default {
 
   created() {
     console.log("Current page: " + this.page);
+    // console.log("Emitted: " + this.onClickChild);
+
   },
 
   computed: {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
   },
+
+    methods: {
+    onClickChild (value) {
+      console.log(value) // someValue
+    }
+  }
 };
 </script>

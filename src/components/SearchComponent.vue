@@ -30,6 +30,7 @@ name: 'SearchComponent',
 
 data() {
     return {
+      // search: "",
       label: "",
       hint: "",
       placeholder: "",
@@ -56,12 +57,21 @@ created() {
   computed: {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH"]),
 
-    search: {
-    get () {
-      return this.$store.state.search
-    },
+  //   search: {
+  //   get () {
+  //     return this.$store.state.search
+  //   },
+  //   set (value) {
+  //     this.$store.commit('search', value)
+  //   }
+  // },
+
+      search: {
+    // get () {
+    //   return this.$store.state.search
+    // },
     set (value) {
-      this.$store.commit('search', value)
+      this.$emit('clicked', value)
     }
   },
    

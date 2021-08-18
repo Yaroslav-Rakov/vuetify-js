@@ -51,7 +51,12 @@ export default {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
 
     paginationLength() {
-      return Math.ceil(this.GET_ALLPOSTS_SEARCH.length / this.postsNumber);
+      if (this.$store.state.search !== null && this.$store.state.search.length > 0) {
+        return 1;
+      } 
+        return Math.ceil(this.GET_ALLPOSTS_SEARCH.length / this.postsNumber);
+      
+      
     },
   },
   methods: {
