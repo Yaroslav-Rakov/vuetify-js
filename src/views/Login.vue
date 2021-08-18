@@ -1,9 +1,6 @@
 <template>
-  <div id="app">
-    <v-app>
-      <v-container>
-        <!-- <v-dialog v-model="dialog" max-width="600px" min-width="360px"> -->
-        <div>
+<v-container>
+  <v-row>
           <v-tabs
             v-model="tab"
             show-arrows
@@ -62,11 +59,9 @@
               </v-card>
             </v-tab-item>
           </v-tabs>
-        </div>
-      </v-container>
-      <!-- </v-dialog> -->
-    </v-app>
-  </div>
+</v-row>
+</v-container>
+
 </template>
 
 <script>

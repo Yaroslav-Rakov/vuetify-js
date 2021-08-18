@@ -1,10 +1,10 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="#app">
     <v-app-bar app color="indigo" depressed>
       <v-container class="py-0 fill-height my-class">
         <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
         <v-btn color="white" to="/" text>Home</v-btn>
-        <v-btn color="white" v-if="this.$store.state.token" to="/posts" text
+        <v-btn color="white" v-if="this.$store.state.token" :to="{name: 'Posts', params: {page: this.$store.state.routePage}}" text
           >Posts</v-btn
         >
         <v-btn color="white" v-if="!this.$store.state.token" to="/login" text
@@ -36,7 +36,10 @@
 
     <v-main class="grey lighten-3">
       <v-container>
-        <v-row>
+       <v-sheet min-height="70vh" rounded="lg">
+        <router-view></router-view>
+       </v-sheet>
+        <!-- <v-row>
           <v-col cols="2">
             <v-sheet rounded="lg">
               <v-list color="transparent">
@@ -68,12 +71,12 @@
               <div v-if="this.$route.path == '/'">
                 <HomeComponent />
               </div>
-              <div v-if="this.$route.path == '/posts'">
+              <div v-if="this.$route.name == 'Posts'">
                 <PostsView />
               </div>
             </v-sheet>
           </v-col>
-        </v-row>
+        </v-row> -->
       </v-container>
     </v-main>
   </v-app>
@@ -81,22 +84,26 @@
 
 
 <script>
-import PostsView from "./views/Posts.vue";
-import RegisterComponent from "./views/Register.vue";
-import LoginComponent from "./views/Login.vue";
-import HomeComponent from "./views/Home.vue";
+
 import store from "./store/store.js";
 import { clearAccessToken } from "./store/auth.js";
 
 export default {
-  components: {
-    LoginComponent,
-    HomeComponent,
-    RegisterComponent,
-    PostsView,
-  },
+
   data() {
-    return {};
+    return {
+
+      // page: this.$store.state.routePage
+    };
+  },
+  computed: {
+    // routePage: {
+    //   get () {
+    //     return this.$route.params.page
+    //   }
+    // },
+
+
   },
   methods: {
     resetToken() {

@@ -15,7 +15,10 @@ export default new Vuex.Store({
     userAuthData: [],
     postsByPage: [],
     allPostsSearch: [],
-    search: ""
+    search: "",
+    routePage: 1,
+    postsPerPage: 1,
+    pageStart: 1
   },
   mutations,
   actions,

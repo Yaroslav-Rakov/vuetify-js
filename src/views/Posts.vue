@@ -4,7 +4,7 @@
       <v-col cols="6" md="9" class="mx-auto mt-6">
         <SearchComponent />
         <PostsComponent />
-        <br />
+        <v-spacer></v-spacer>
         <PaginationComponent />
       </v-col>
     </v-row>
@@ -22,7 +22,9 @@ export default {
   components: { PostsComponent, SearchComponent, PaginationComponent },
 
   data() {
-    return {};
+    return {
+
+    };
   },
 
   created() {
