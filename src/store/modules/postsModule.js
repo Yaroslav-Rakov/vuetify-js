@@ -13,6 +13,9 @@ const postsModule = {
     },
     SET_SEARCH(state, response) {
       state.search = response
+    },
+    NEW_LIMIT(state, response) {
+      state.lim = response
     }
 
   },
