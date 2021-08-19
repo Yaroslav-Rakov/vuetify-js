@@ -66,10 +66,6 @@ export default {
   computed: {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH"]),
 
-    checkSearch() {
-      return console.log("asdsadsa");
-    },
-
     //   search: {
     //   get () {
     //     return this.$store.state.search
@@ -84,7 +80,7 @@ export default {
     ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
     clickSearch() {
       this.$emit("clicked", this.search);
-      console.log("clicked");
+      console.log("searched");
     },
 
     clear() {

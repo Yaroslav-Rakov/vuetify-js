@@ -35,10 +35,10 @@ export default {
 
   methods: {
     onSearchChild(value) {
-      this.$store.commit("search", value);
+      this.$store.commit("SEARCH", value);
     },
     onClearChild() {
-      this.$store.commit("search", null);
+      this.$store.commit("SEARCH", null);
     },
   },
 };

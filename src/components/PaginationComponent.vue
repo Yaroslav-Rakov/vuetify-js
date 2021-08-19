@@ -71,7 +71,7 @@ export default {
       // this.$store.commit("postsPerPage")
       if (val.length > 0 && val > 0) {
         this.postsNumber = val;
-        this.$store.commit("newLimit", parseInt(val));
+        this.$store.commit("NEW_LIMIT", parseInt(val));
         this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
       }
       console.log(val);
