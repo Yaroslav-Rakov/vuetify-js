@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userModule from './userModule.js'
-import postsModule from './postsModule.js'
+import userModule from './modules/userModule.js'
+import postsModule from './modules/postsModule.js'
 
 Vue.use(Vuex)
 

@@ -1,5 +1,5 @@
-import api from './api.js'
-import { getAccessToken, setAccessToken } from './auth.js'
+import api from '../api.js'
+import { getAccessToken, setAccessToken } from '../auth.js'
 
 const userModule = {
     state: {
