@@ -18,7 +18,16 @@
         :flat="flat"
         :counter="counterEn ? counter : false"
         :dense="dense"
-      ></v-text-field>
+      >
+        <template v-slot:append>
+          <v-icon class="ml-3" aria-hidden="false" @click="clear"
+            >mdi-close
+          </v-icon>
+          <v-icon class="ml-3" aria-hidden="false" @click="toggleMarker"
+            >mdi-text-search
+          </v-icon>
+        </template>
+      </v-text-field>
     </v-responsive>
   </div>
 </template>
@@ -26,11 +35,11 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-name: 'SearchComponent',
+  name: "SearchComponent",
 
-data() {
+  data() {
     return {
-      // search: "",
+      search: null,
       label: "",
       hint: "",
       placeholder: "",
@@ -40,16 +49,16 @@ data() {
       solo: false,
       singleLine: false,
       filled: false,
-      clearable: true,
+      clearable: false,
       persistentHint: false,
       loading: false,
       flat: false,
       counterEn: false,
       counter: 0,
       dense: false,
-    }
-},
-created() {
+    };
+  },
+  created() {
     this.ACTION_ALLPOSTS_SEARCH();
     this.ACTION_POSTS_PAGE();
     console.log("Current page: " + this.page);
@@ -57,29 +66,32 @@ created() {
   computed: {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH"]),
 
-  //   search: {
-  //   get () {
-  //     return this.$store.state.search
-  //   },
-  //   set (value) {
-  //     this.$store.commit('search', value)
-  //   }
-  // },
+    checkSearch() {
+      return console.log("asdsadsa");
+    },
 
-      search: {
-    // get () {
-    //   return this.$store.state.search
+    //   search: {
+    //   get () {
+    //     return this.$store.state.search
+    //   },
+    //   set (value) {
+    //     this.$store.commit('search', value)
+    //   }
     // },
-    set (value) {
-      this.$emit('clicked', value)
-    }
-  },
-   
+
   },
   methods: {
     ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
-  },
+    toggleMarker() {
+      this.$emit("clicked", this.search);
+      console.log("clicked");
+    },
 
+    clear() {
+      this.$emit("cleared", this.search);
+      console.log("cleared");
+    },
+  },
 };
 </script>
 <style>

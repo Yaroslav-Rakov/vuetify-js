@@ -2,8 +2,8 @@
   <v-container>
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
-        <SearchComponent />
-        <PostsComponent @clicked="onClickChild"/>
+        <SearchComponent @clicked="onClickChild" @cleared="onClearChild" />
+        <PostsComponent />
         <v-spacer></v-spacer>
         <PaginationComponent />
       </v-col>
@@ -22,25 +22,24 @@ export default {
   components: { PostsComponent, SearchComponent, PaginationComponent },
 
   data() {
-    return {
-
-    };
+    return {};
   },
 
   created() {
     console.log("Current page: " + this.page);
-    // console.log("Emitted: " + this.onClickChild);
-
   },
 
   computed: {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
   },
 
-    methods: {
-    onClickChild (value) {
-      console.log(value) // someValue
-    }
-  }
+  methods: {
+    onClickChild(value) {
+      this.$store.commit("search", value);
+    },
+    onClearChild() {
+      this.$store.commit("search", null);
+    },
+  },
 };
 </script>
