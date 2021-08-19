@@ -30,7 +30,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_POSTS"]),
+    ...mapGetters(["GET_POSTS"]),
   },
 
   methods: {

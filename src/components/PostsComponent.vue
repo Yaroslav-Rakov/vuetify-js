@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- <v-card
-      class="mb-1"
-      v-for="(item, index) in GET_FILTERED_POSTS"
-      :key="index"
-    > -->
         <v-card
       class="mb-1"
       v-for="(item, index) in GET_POSTS"
@@ -34,7 +29,7 @@ export default {
   },
  
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH","GET_SEARCH","GET_FILTERED_POSTS", "GET_POSTS"]),
+    ...mapGetters(["GET_SEARCH", "GET_POSTS"]),
 
     search: {
       get () {

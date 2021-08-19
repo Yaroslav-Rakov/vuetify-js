@@ -59,27 +59,15 @@ export default {
     };
   },
   created() {
-    this.ACTION_ALLPOSTS_SEARCH();
-    this.ACTION_POSTS_PAGE();
     this.ACTION_POSTS();
 
     console.log("Current page: " + this.page);
   },
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH", "GET_POSTS"]),
-
-    //   search: {
-    //   get () {
-    //     return this.$store.state.search
-    //   },
-    //   set (value) {
-    //     this.$store.commit('search', value)
-    //   }
-    // },
-
+    ...mapGetters(["GET_SEARCH", "GET_POSTS"]),
   },
   methods: {
-    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH", "ACTION_POSTS", "ACTION_SEARCH"]),
+    ...mapActions(["ACTION_POSTS", "ACTION_SEARCH"]),
     clickSearch() {
       this.$emit("clicked", this.search);
       console.log("searched");
