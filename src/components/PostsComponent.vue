@@ -34,7 +34,7 @@ export default {
 
     search: {
       get () {
-        return this.$store.state.search
+        return this.$store.state.postsModule.search
       }
     },
 

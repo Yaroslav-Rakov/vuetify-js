@@ -66,6 +66,8 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import store from '@/store/store.js'
+
 export default {
   name: "LoginComponent",
   computed: {
@@ -73,7 +75,7 @@ export default {
       return () =>
         this.userRegister.password === this.verify || "Password must match";
     },
-    ...mapGetters(["GET_AUTH_DATA", "GET_LOGIN", "GET_REGISTER_DATA"]),
+    ...mapGetters(["GET_AUTH_DATA"]),
   },
   created() {
     // this.ACTION_AUTH_DATA();
@@ -84,7 +86,8 @@ export default {
     login() {
       if (this.$refs.loginForm.validate()) {
         console.log("login clicked");
-        this.$store.dispatch("ACTION_LOGIN", this.userData).then(path => { 
+        console.log("State check: "+ store.state.userModule.userAuthData.name);
+        this.$store.dispatch('ACTION_LOGIN', this.userData).then(path => { 
         this.$router.push(path);
       });
       }

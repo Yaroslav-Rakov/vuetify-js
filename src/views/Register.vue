@@ -117,7 +117,7 @@ export default {
       return () =>
         this.userRegister.password === this.verify || "Password must match";
     },
-    ...mapGetters(["GET_AUTH_DATA", "GET_LOGIN", "GET_REGISTER_DATA"]),
+    ...mapGetters(["GET_AUTH_DATA"]),
   },
   created() {
     // this.ACTION_AUTH_DATA();

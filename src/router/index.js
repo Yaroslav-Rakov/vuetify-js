@@ -48,8 +48,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('from router store.state.token', store.state.token);
-  const redirect = to.matched.some(record => record.meta.requiresAuth) && !store.state.token?
+  console.log('from router store.state.userModule.token', store.state.userModule.token);
+  const redirect = to.matched.some(record => record.meta.requiresAuth) && !store.state.userModule.token?
       { name: "Login" }: undefined;
 
   console.log('redirect', redirect);

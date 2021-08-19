@@ -23,7 +23,7 @@
           <v-icon class="ml-3" aria-hidden="false" @click="clear"
             >mdi-close
           </v-icon>
-          <v-icon class="ml-3" aria-hidden="false" @click="toggleMarker"
+          <v-icon class="ml-3" aria-hidden="false" @click="clickSearch"
             >mdi-text-search
           </v-icon>
         </template>
@@ -82,12 +82,13 @@ export default {
   },
   methods: {
     ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
-    toggleMarker() {
+    clickSearch() {
       this.$emit("clicked", this.search);
       console.log("clicked");
     },
 
     clear() {
+      this.search = null;
       this.$emit("cleared", this.search);
       console.log("cleared");
     },

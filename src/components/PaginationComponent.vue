@@ -36,7 +36,7 @@ export default {
 
   data() {
     return {
-      page: this.$store.state.postsPerPage,
+      page: 1,
       postsNumber: 7,
     };
   },
@@ -51,7 +51,7 @@ export default {
     ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
 
     paginationLength() {
-      if (this.$store.state.search !== null && this.$store.state.search.length > 0) {
+      if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {
         return 1;
       } 
         return Math.ceil(this.GET_ALLPOSTS_SEARCH.length / this.postsNumber);

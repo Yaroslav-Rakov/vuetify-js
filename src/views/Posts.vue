@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
-        <SearchComponent @clicked="onClickChild" @cleared="onClearChild" />
+        <SearchComponent @clicked="onSearchChild" @cleared="onClearChild"/>
         <PostsComponent />
         <v-spacer></v-spacer>
         <PaginationComponent />
@@ -34,7 +34,7 @@ export default {
   },
 
   methods: {
-    onClickChild(value) {
+    onSearchChild(value) {
       this.$store.commit("search", value);
     },
     onClearChild() {

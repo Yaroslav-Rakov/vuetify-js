@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     usr() {
-      if (store.state.token) {
+      if (store.state.userModule.token) {
         return store.getters.GET_AUTH_DATA.name;
       } else {
         return ''
