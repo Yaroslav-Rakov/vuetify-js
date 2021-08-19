@@ -17,12 +17,6 @@ const postsModule = {
     },
     SEARCH(state, response) {
       state.search = response
-    },
-    POSTS_PER_PAGE(state, response) {
-      state.postsPer = response
-    },
-    NEW_LIMIT(state, response) {
-      state.lim = response
     }
   },
   getters: {
@@ -59,6 +53,11 @@ const postsModule = {
     },
   },
   actions: {
+    ACTION_SEARCH({commit}, value){
+        commit("SEARCH", value);
+
+    },
+
     ACTION_POSTS_PAGE({ commit, state }, page) {
       // let limit = 7;
       console.log('ACTION_POSTS_DATA works');

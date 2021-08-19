@@ -35,7 +35,8 @@ export default {
 
   methods: {
     onSearchChild(value) {
-      this.$store.commit("SEARCH", value);
+      // this.$store.commit("SEARCH", value);
+      this.$store.dispatch("ACTION_SEARCH", value);
     },
     onClearChild() {
       this.$store.commit("SEARCH", null);
