@@ -62,7 +62,8 @@ export default {
   methods: {
     myInput() {
       console.log("Current page: " + this.page);
-      this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
+      // this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
+      this.$store.dispatch("ACTION_POSTS", this.page);
       this.$router.push({ path: "", query: { page: this.page } });
       console.log("Query: " + this.$route.query.page);
       // console.log("Root data: " + this.$root.params);
@@ -72,7 +73,9 @@ export default {
       if (val.length > 0 && val > 0) {
         this.postsNumber = val;
         this.$store.commit("NEW_LIMIT", parseInt(val));
-        this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
+        // this.$store.dispatch("ACTION_POSTS_PAGE", this.page);
+        this.$store.dispatch("ACTION_POSTS", this.page);
+
       }
       console.log(val);
     },

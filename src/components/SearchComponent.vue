@@ -66,7 +66,7 @@ export default {
     console.log("Current page: " + this.page);
   },
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_SEARCH", "GET_POSTS"]),
 
     //   search: {
     //   get () {
@@ -79,7 +79,7 @@ export default {
 
   },
   methods: {
-    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH", "ACTION_POSTS"]),
+    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH", "ACTION_POSTS", "ACTION_SEARCH"]),
     clickSearch() {
       this.$emit("clicked", this.search);
       console.log("searched");

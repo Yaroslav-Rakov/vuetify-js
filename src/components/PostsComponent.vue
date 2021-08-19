@@ -1,8 +1,13 @@
 <template>
   <div>
-    <v-card
+    <!-- <v-card
       class="mb-1"
       v-for="(item, index) in GET_FILTERED_POSTS"
+      :key="index"
+    > -->
+        <v-card
+      class="mb-1"
+      v-for="(item, index) in GET_POSTS"
       :key="index"
     >
       <v-card-title>{{ item.title }}</v-card-title>

@@ -25,10 +25,6 @@ const postsModule = {
     }
   },
   getters: {
-    GET_POSTS(state) {
-      console.log(state.posts);
-      return state.posts;
-    },
 
     GET_POSTS_PAGE(state) {
       console.log(state.postsByPage);
@@ -61,6 +57,23 @@ const postsModule = {
         });
       }
     },
+    GET_POSTS(state) {
+      console.log(state.posts);
+      return state.posts;
+      // if (state.search !== null && state.search.length > 0) {
+      //   return state.posts.filter((post) => {
+      //     return post.title.toLowerCase().includes(state.search.toLowerCase());
+      //   });
+      // } else {
+      //   return state.posts.filter((post) => {
+      //     let checkNull =
+      //       state.search === null
+      //         ? state.posts
+      //         : post.title.toLowerCase().includes(state.search.toLowerCase());
+      //     return checkNull;
+      //   });
+      // }
+    },
   },
   actions: {
     ACTION_SEARCH({ commit }, value) {
@@ -75,12 +88,20 @@ const postsModule = {
         if (!page) page = 1
         api.get("posts?limit=1000000000")
           .then((response) => {
-            commit('SET_POSTS', response.data)
+            commit('SET_POSTS', response.data.filter((post) => {
+              return post.title.toLowerCase().includes(state.search.toLowerCase());
+            }))
           });
       } else {
         api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
           .then((response) => {
-            commit('SET_POSTS', response.data)
+            commit('SET_POSTS', response.data.filter((post) => {
+              let checkNull =
+                state.search === null
+                  ? state.posts
+                  : post.title.toLowerCase().includes(state.search.toLowerCase());
+              return checkNull;
+            }))
           });
       }
 

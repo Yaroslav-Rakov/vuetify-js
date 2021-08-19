@@ -30,16 +30,19 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_POSTS"]),
   },
 
   methods: {
     onSearchChild(value) {
       // this.$store.commit("SEARCH", value);
       this.$store.dispatch("ACTION_SEARCH", value);
+      this.$store.dispatch("ACTION_POSTS", value);
+
     },
     onClearChild() {
       this.$store.commit("SET_SEARCH", null);
+      this.$store.dispatch("ACTION_POSTS");
     },
   },
 };
