@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "PostsComponent",
@@ -30,7 +30,7 @@ export default {
   },
  
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH","GET_SEARCH","GET_FILTERED_POSTS"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH","GET_SEARCH","GET_FILTERED_POSTS", "GET_POSTS"]),
 
     search: {
       get () {
@@ -62,7 +62,7 @@ export default {
   //  },
   },
   methods: {
-    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
+    // ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
   },
 };
 </script>

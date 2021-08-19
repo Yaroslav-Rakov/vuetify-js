@@ -48,7 +48,7 @@ export default {
   // },
 
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_POSTS"]),
 
     paginationLength() {
       if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {

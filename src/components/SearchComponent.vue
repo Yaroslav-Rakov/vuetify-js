@@ -61,6 +61,8 @@ export default {
   created() {
     this.ACTION_ALLPOSTS_SEARCH();
     this.ACTION_POSTS_PAGE();
+    this.ACTION_POSTS();
+
     console.log("Current page: " + this.page);
   },
   computed: {
@@ -77,7 +79,7 @@ export default {
 
   },
   methods: {
-    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
+    ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH", "ACTION_POSTS"]),
     clickSearch() {
       this.$emit("clicked", this.search);
       console.log("searched");

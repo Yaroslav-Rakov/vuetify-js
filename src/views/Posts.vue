@@ -39,7 +39,7 @@ export default {
       this.$store.dispatch("ACTION_SEARCH", value);
     },
     onClearChild() {
-      this.$store.commit("SEARCH", null);
+      this.$store.commit("SET_SEARCH", null);
     },
   },
 };

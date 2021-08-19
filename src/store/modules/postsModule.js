@@ -4,22 +4,32 @@ const postsModule = {
   state: {
     postsByPage: [],
     allPostsSearch: [],
+    posts: [],
     search: "",
     routePage: 1,
     lim: 7
   },
   mutations: {
+    SET_POSTS(state, response) {
+      state.posts = response
+    },
+
     SET_POSTS_PAGE(state, response) {
       state.postsByPage = response
     },
     SET_ALLPOSTS_SEARCH(state, response) {
       state.allPostsSearch = response
     },
-    SEARCH(state, response) {
+    SET_SEARCH(state, response) {
       state.search = response
     }
   },
   getters: {
+    GET_POSTS(state) {
+      console.log(state.posts);
+      return state.posts;
+    },
+
     GET_POSTS_PAGE(state) {
       console.log(state.postsByPage);
       return state.postsByPage;
@@ -53,8 +63,28 @@ const postsModule = {
     },
   },
   actions: {
-    ACTION_SEARCH({commit}, value){
-        commit("SEARCH", value);
+    ACTION_SEARCH({ commit }, value) {
+      commit("SET_SEARCH", value);
+
+    },
+
+    ACTION_POSTS({ commit, state }, page) {
+      console.log('inside ACTION_POSTS function');
+
+      if (state.search !== null && state.search.length > 0) {
+        if (!page) page = 1
+        api.get("posts?limit=1000000000")
+          .then((response) => {
+            commit('SET_POSTS', response.data)
+          });
+      } else {
+        api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
+          .then((response) => {
+            commit('SET_POSTS', response.data)
+          });
+      }
+
+
 
     },
 

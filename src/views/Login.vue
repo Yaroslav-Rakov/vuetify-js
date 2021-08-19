@@ -66,7 +66,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import store from '@/store/store.js'
+// import store from '@/store/store.js'
 
 export default {
   name: "LoginComponent",
@@ -86,7 +86,7 @@ export default {
     login() {
       if (this.$refs.loginForm.validate()) {
         console.log("login clicked");
-        console.log("State check: "+ store.state.userModule.userAuthData.name);
+        // console.log("State check: "+ store.state.userModule.userAuthData.name);
         this.$store.dispatch('ACTION_LOGIN', this.userData).then(path => { 
         this.$router.push(path);
       });
