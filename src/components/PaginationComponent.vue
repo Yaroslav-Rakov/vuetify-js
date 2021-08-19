@@ -41,20 +41,14 @@ export default {
     };
   },
 
-  // watch:{
-  //     $route (){
-  //         this.$router.push(this.$route.params.page);
-  //     }
-  // },
-
   computed: {
-    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_POSTS"]),
+    ...mapGetters(["GET_POSTS_PAGE", "GET_ALLPOSTS_SEARCH", "GET_POSTS","GET_POSTS_LENGTH"]),
 
     paginationLength() {
-      if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {
-        return 1;
-      } 
-        return Math.ceil(this.GET_ALLPOSTS_SEARCH.length / this.postsNumber);
+      // if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {
+      //   return 1;
+      // } 
+        return Math.ceil(this.GET_POSTS_LENGTH / this.postsNumber);
       
       
     },

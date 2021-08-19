@@ -30,7 +30,6 @@ export default {
   data() {
     return {
 
-
     };
   },
  
@@ -42,32 +41,9 @@ export default {
         return this.$store.state.postsModule.search
       }
     },
-
-   // filteredList() {
-   //   return this.GET_POSTS_PAGE.filter((post) => {
-   //     let checkNull =
-      //    this.search === null
-       //     ? this.GET_POSTS_PAGE
-      //      : post.title.toLowerCase().includes(this.search.toLowerCase());
-     //   return checkNull;
-    //  });
-   // },
-   // filteredListSearch() {
-    //  if (this.search !== null && this.search.length > 0) {
-     //   return this.GET_ALLPOSTS_SEARCH.filter((post) => {
-      //    let checkNull =
-       //     this.search === null
-      //        ? this.filteredList
-      //        : post.title.toLowerCase().includes(this.search.toLowerCase());
-     //     return checkNull;
-    //    });
-    //  } else {
-    //    return this.filteredList;
-    //  }
-  //  },
+  
   },
   methods: {
-    // ...mapActions(["ACTION_POSTS_PAGE", "ACTION_ALLPOSTS_SEARCH"]),
   },
 };
 </script>
