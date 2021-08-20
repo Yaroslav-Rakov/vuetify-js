@@ -49,31 +49,17 @@ const postsModule = {
       commit("SET_SEARCH", value);
     },
 
-    // ACTION_PAGINATION_PAGES({ commit, state }) {
-    //   api.get("posts?limit=1000000000")
-    //   .then((response) => {
-    //       commit('SET_PAGINATION_PAGES', Math.ceil(response.data.length / state.postsPerPage))
-    //   },);
-    // },
-
     ACTION_POSTS({ commit, state }, page) {
       console.log('inside ACTION_POSTS function');
-      let search = '?search='+state.search;
-      if (state.search !== null && state.search.length > 0) {
+      let search = 'search='+state.search+'&';
         if (!page) page = 1
-        if (!search) search =''
-        api.get("posts?search="+state.search)
-          .then((response) => {
-            commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
-          }, );
-      } else {
-        api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim + search)
+        if (!state.search) search =''
+        api.get("posts?"+ search +"limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
           .then((response) => {
             commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
           }).catch((error) => {
             console.error("There was an error!", error);
           });
-      }
     },
   }
 }
