@@ -32,9 +32,10 @@ export default {
   },
 
   created() {
-    console.log("Current page: " + this.page);
-    // this.urlPage = this.$route.query.page;
-    // console.log("Url page: "+this.urlPage);
+    this.page = parseInt(this.$route.query.page);
+    console.log("Url page: " + this.$route.query.page);
+    this.$store.commit("SET_PAGE_URL", this.page);
+    this.$store.dispatch("ACTION_POSTS");
   },
 
   computed: {
@@ -64,9 +65,9 @@ export default {
       this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
       this.$store.dispatch("ACTION_POSTS", page);
     },
-    pageFromUrl(){
-      this.$refs.pageFromUrl.setPage(this.urlPage);
-    }
+    // pageFromUrl(){
+    //   this.$refs.pageFromUrl.setPage(this.urlPage);
+    // }
   },
 };
 </script>
