@@ -42,9 +42,9 @@ export default {
   },
 
   methods: {
-    onSearch(value) {
-      this.$store.dispatch("ACTION_SEARCH", value);
-      this.$store.dispatch("ACTION_POSTS", value);
+    onSearch(search) {
+      this.$store.dispatch("ACTION_SEARCH", search);
+      this.$store.dispatch("ACTION_POSTS", search);
     },
     onClear() {
       this.$router.push({ path: "", query: { page: 1 } });
@@ -54,12 +54,14 @@ export default {
     },
     changePage(page) {
       console.log("Current page: " + page);
+      this.$store.state.postsModule.pageUrl = page;
       this.$store.dispatch("ACTION_POSTS", page);
       this.$router.push({ path: "", query: { page: page } });
       console.log("Query: " + this.$route.query.page);
     },
-    changePostsLimit(page, val) {
-      this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", val);
+    changePostsLimit(page, postsLimit) {
+      this.$store.state.postsModule.pageUrl = page;
+      this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
       this.$store.dispatch("ACTION_POSTS", page);
     },
     pageFromUrl(){

@@ -20,7 +20,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          Pages
+          Posts
         </v-btn>
       </template>
 
@@ -48,7 +48,7 @@ export default {
 
   data() {
     return {
-      page: 1,
+      page: this.$store.state.postsModule.pageUrl,
       items: [{ title: 12 }, { title: 9 }, { title: 7 }, { title: 5 }],
       offset: true,
     };
@@ -58,10 +58,11 @@ export default {
       this.page = val;
     },
   },
-  created(){
+  created() {
     this.page = parseInt(this.$route.query.page);
-    console.log("Url page: "+this.page);
-    this.$store.dispatch("ACTION_POSTS", this.page)
+    console.log("Url page: " + this.$route.query.page);
+    // this.$store.commit("SET_PAGE_URL", this.$route.query.page);
+    this.$store.dispatch("ACTION_POSTS", this.page);
   },
 
   computed: {
@@ -85,7 +86,10 @@ export default {
     },
     changePostsLimit(postsLimit) {
       this.$emit("changePostsLimit", this.page, postsLimit);
-    }
+    },
+    pageFromUrl() {
+      this.$emit("changePostsLimit", this.page);
+    },
   },
 };
 </script>

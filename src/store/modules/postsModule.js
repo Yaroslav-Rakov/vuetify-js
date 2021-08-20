@@ -6,6 +6,7 @@ const postsModule = {
     search: "",
     postsLimit: 7,
     paginationPages: null,
+    pageUrl: 1
   },
   mutations: {
     SET_POSTS(state, posts) {
@@ -19,6 +20,9 @@ const postsModule = {
     },
     SET_PAGINATION_PAGES(state, pages) {
       state.paginationPages = Math.ceil(pages/state.postsLimit)
+    },
+    SET_PAGE_URL(state, pageUrl) {
+      state.pageUrl = pageUrl
     }
 
   },
@@ -50,8 +54,8 @@ const postsModule = {
     ACTION_POSTS({ commit, state }, page) {
       console.log('inside ACTION_POSTS function');
       let search = 'search='+state.search+'&';
-        if (!page) page = 1
-        if (!state.search) search =''
+        if (!page) page = 1;
+        if (!state.search) search ='';
         api.get("posts?"+ search +"limit=" + state.postsLimit + '&skip=' + (page - 1) * state.postsLimit)
           .then((response) => {
             commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
