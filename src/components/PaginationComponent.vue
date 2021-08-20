@@ -4,7 +4,7 @@
               <v-col cols="7">
                   <v-pagination
                     v-model="page"
-                    :length="paginationLength"
+                    :length="this.$store.state.postsModule.paginationPages"
                     @input="myInput()"
                   ></v-pagination>
               </v-col>
@@ -34,11 +34,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["GET_POSTS","GET_POSTS_LENGTH"]),
+    ...mapGetters(["GET_POSTS","GET_POSTS_LENGTH","GET_PAGINATION_PAGES"]),
 
-    paginationLength() {
-        return Math.ceil(this.GET_POSTS_LENGTH / this.postsNumber);
-    },
+    // paginationLength() {
+    //     return Math.ceil(this.GET_PAGINATION_PAGES / this.postsNumber);
+    // },
   },
   methods: {
     myInput() {
@@ -52,6 +52,7 @@ export default {
         this.postsNumber = val;
         this.$store.commit("NEW_LIMIT", parseInt(val));
         this.$store.dispatch("ACTION_POSTS", this.page);
+        this.$store.dispatch("ACTION_PAGINATION_PAGES", this.page);
 
       }
       console.log(val);

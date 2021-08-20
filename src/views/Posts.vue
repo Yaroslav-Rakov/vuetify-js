@@ -27,6 +27,7 @@ export default {
 
   created() {
     console.log("Current page: " + this.page);
+    // this.$store.dispatch("ACTION_PAGINATION_PAGES");
   },
 
   computed: {

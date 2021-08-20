@@ -5,7 +5,9 @@ const postsModule = {
     posts: [],
     search: "",
     routePage: 1,
-    lim: 7
+    lim: 7,
+    paginationPages: null,
+    postsPerPage: 7
   },
   mutations: {
     SET_POSTS(state, response) {
@@ -16,6 +18,9 @@ const postsModule = {
     },
     NEW_LIMIT(state, response) {
       state.lim = response
+    },
+    SET_PAGINATION_PAGES(state, response) {
+      state.paginationPages = response
     }
 
   },
@@ -32,11 +37,22 @@ const postsModule = {
       console.log(state.search);
       return state.search;
     },
+    GET_PAGINATION_PAGES (state) {
+      console.log(state.paginationPages);
+      return state.paginationPages;
+    }
 
   },
   actions: {
     ACTION_SEARCH({ commit }, value) {
       commit("SET_SEARCH", value);
+    },
+
+    ACTION_PAGINATION_PAGES({ commit, state }) {
+      api.get("posts?limit=1000000000")
+      .then((response) => {
+          commit('SET_PAGINATION_PAGES', Math.ceil(response.data.length / state.postsPerPage))
+      },);
     },
 
     ACTION_POSTS({ commit, state }, page) {
@@ -46,20 +62,22 @@ const postsModule = {
         if (!page) page = 1
         api.get("posts?limit=1000000000")
           .then((response) => {
-            commit('SET_POSTS', response.data.filter((post) => {
+            commit('SET_POSTS', response.data.data.filter((post) => {
               return post.title.toLowerCase().includes(state.search.toLowerCase());
-            }))
-          });
+            }),)
+          }, );
       } else {
         api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
           .then((response) => {
-            commit('SET_POSTS', response.data.filter((post) => {
+            commit('SET_POSTS', response.data.data.filter((post) => {
               let checkNull =
                 state.search === null
                   ? state.posts
                   : post.title.toLowerCase().includes(state.search.toLowerCase());
               return checkNull;
             }))
+          }).catch((error) => {
+            console.error("There was an error!", error);
           });
       }
     },
