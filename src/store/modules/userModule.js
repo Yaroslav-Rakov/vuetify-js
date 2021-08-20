@@ -7,12 +7,12 @@ const userModule = {
       userAuthData: []
     },
     mutations: {
-      SET_AUTH_DATA(state, response) {
-        state.userAuthData = response
+      SET_AUTH_DATA(state, authData) {
+        state.userAuthData = authData
       },
-      SET_TOKEN(state, response) {
-        state.token = response
-        setAccessToken(response)
+      SET_TOKEN(state, token) {
+        state.token = token
+        setAccessToken(token)
   
         console.log('SET_TOKEN state', state);
       }
