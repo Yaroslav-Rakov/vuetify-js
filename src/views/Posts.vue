@@ -2,10 +2,10 @@
   <v-container>
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
-        <SearchComponent @clicked="onSearchChild" @cleared="onClearChild" />
+        <SearchComponent @search="onSearch" @clear="onClear" />
         <PostsComponent />
         <v-spacer></v-spacer>
-        <PaginationComponent />
+        <PaginationComponent ref="paginationReset"/>
       </v-col>
     </v-row>
   </v-container>
@@ -27,7 +27,6 @@ export default {
 
   created() {
     console.log("Current page: " + this.page);
-    // this.$store.dispatch("ACTION_PAGINATION_PAGES");
   },
 
   computed: {
@@ -35,13 +34,15 @@ export default {
   },
 
   methods: {
-    onSearchChild(value) {
+    onSearch(value) {
       this.$store.dispatch("ACTION_SEARCH", value);
       this.$store.dispatch("ACTION_POSTS", value);
     },
-    onClearChild() {
+    onClear() {
+      this.$router.push({ path: "", query: { page: 1 } });
       this.$store.dispatch("ACTION_SEARCH", null);
-      this.$store.dispatch("ACTION_POSTS");
+      this.$store.dispatch("ACTION_POSTS", 1);
+      this.$refs.paginationReset.setValue(1);
     },
   },
 };

@@ -53,12 +53,30 @@ export default {
       offset: true,
     };
   },
+  watch: {
+    page: function (val) {
+      this.page = val;
+    },
+  },
 
   computed: {
     ...mapGetters(["GET_POSTS", "GET_POSTS_LENGTH", "GET_PAGINATION_PAGES"]),
+
+    // page: {
+    //   get() {
+    //     {
+    //         return this.$store.state.postsModule.routePage
+    //     }
+    //   }
+
+    // }
   },
   methods: {
+    setValue: function (value) {
+      this.page = value;
+    },
     myInput() {
+      this.$store.state.postsModule.routePage = this.page;
       console.log("Current page: " + this.page);
       this.$store.dispatch("ACTION_POSTS", this.page);
       this.$router.push({ path: "", query: { page: this.page } });
@@ -66,7 +84,8 @@ export default {
     },
     changePostsNumber(val) {
       if (val > 0) {
-        this.$store.dispatch("ACTION_NEW_LIMIT", parseInt(val));
+        this.$store.state.postsModule.routePage = this.page;
+        this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", parseInt(val));
         this.$store.dispatch("ACTION_POSTS", this.page);
       }
       console.log(val);

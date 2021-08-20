@@ -69,13 +69,13 @@ export default {
   methods: {
     ...mapActions(["ACTION_POSTS", "ACTION_SEARCH"]),
     clickSearch() {
-      this.$emit("clicked", this.search);
+      this.$emit("search", this.search);
       console.log("searched");
     },
 
     clear() {
       this.search = null;
-      this.$emit("cleared", this.search);
+      this.$emit("clear", this.search);
       console.log("cleared");
     },
   },

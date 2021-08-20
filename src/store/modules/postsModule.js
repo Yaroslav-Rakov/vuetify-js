@@ -5,23 +5,21 @@ const postsModule = {
     posts: [],
     search: "",
     routePage: 1,
-    lim: 7,
+    postsLimit: 7,
     paginationPages: null,
-    postsPerPage: 7,
   },
   mutations: {
-    SET_POSTS(state, response) {
-      state.posts = response
+    SET_POSTS(state, posts) {
+      state.posts = posts
     },
-    SET_SEARCH(state, response) {
-      state.search = response
+    SET_SEARCH(state, search) {
+      state.search = search
     },
-    SET_NEW_LIMIT(state, response) {
-      state.lim = response
-      state.postsPerPage = response
+    SET_NEW_POSTS_LIMIT(state, postsLimit) {
+      state.postsLimit = postsLimit
     },
-    SET_PAGINATION_PAGES(state, response) {
-      state.paginationPages = Math.ceil(response/state.postsPerPage)
+    SET_PAGINATION_PAGES(state, pages) {
+      state.paginationPages = Math.ceil(pages/state.postsLimit)
     }
 
   },
@@ -46,8 +44,8 @@ const postsModule = {
       commit("SET_SEARCH", value);
     },
 
-    ACTION_NEW_LIMIT({commit}, val) {
-      commit("SET_NEW_LIMIT", val)
+    ACTION_NEW_POSTS_LIMIT({commit}, val) {
+      commit("SET_NEW_POSTS_LIMIT", val)
     },
 
     ACTION_POSTS({ commit, state }, page) {
@@ -55,7 +53,7 @@ const postsModule = {
       let search = 'search='+state.search+'&';
         if (!page) page = 1
         if (!state.search) search =''
-        api.get("posts?"+ search +"limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
+        api.get("posts?"+ search +"limit=" + state.postsLimit + '&skip=' + (page - 1) * state.postsLimit)
           .then((response) => {
             commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
           }).catch((error) => {
