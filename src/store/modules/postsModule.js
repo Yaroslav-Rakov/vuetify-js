@@ -7,7 +7,8 @@ const postsModule = {
     routePage: 1,
     lim: 7,
     paginationPages: null,
-    postsPerPage: 7
+    postsPerPage: 7,
+    totalPosts: null
   },
   mutations: {
     SET_POSTS(state, response) {
@@ -20,7 +21,7 @@ const postsModule = {
       state.lim = response
     },
     SET_PAGINATION_PAGES(state, response) {
-      state.paginationPages = response
+      state.paginationPages = Math.ceil(response/state.postsPerPage)
     }
 
   },
@@ -39,7 +40,7 @@ const postsModule = {
     },
     GET_PAGINATION_PAGES (state) {
       console.log(state.paginationPages);
-      return state.paginationPages;
+      return Math.ceil(state.paginationPages);
     }
 
   },
@@ -48,34 +49,27 @@ const postsModule = {
       commit("SET_SEARCH", value);
     },
 
-    ACTION_PAGINATION_PAGES({ commit, state }) {
-      api.get("posts?limit=1000000000")
-      .then((response) => {
-          commit('SET_PAGINATION_PAGES', Math.ceil(response.data.length / state.postsPerPage))
-      },);
-    },
+    // ACTION_PAGINATION_PAGES({ commit, state }) {
+    //   api.get("posts?limit=1000000000")
+    //   .then((response) => {
+    //       commit('SET_PAGINATION_PAGES', Math.ceil(response.data.length / state.postsPerPage))
+    //   },);
+    // },
 
     ACTION_POSTS({ commit, state }, page) {
       console.log('inside ACTION_POSTS function');
-
+      let search = '?search='+state.search;
       if (state.search !== null && state.search.length > 0) {
         if (!page) page = 1
-        api.get("posts?limit=1000000000")
+        if (!search) search =''
+        api.get("posts?search="+state.search)
           .then((response) => {
-            commit('SET_POSTS', response.data.data.filter((post) => {
-              return post.title.toLowerCase().includes(state.search.toLowerCase());
-            }),)
+            commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
           }, );
       } else {
-        api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim)
+        api.get("posts?limit=" + state.lim + '&skip=' + (page - 1) * state.lim + search)
           .then((response) => {
-            commit('SET_POSTS', response.data.data.filter((post) => {
-              let checkNull =
-                state.search === null
-                  ? state.posts
-                  : post.title.toLowerCase().includes(state.search.toLowerCase());
-              return checkNull;
-            }))
+            commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES",response.data.pagination.total)
           }).catch((error) => {
             console.error("There was an error!", error);
           });
