@@ -8,7 +8,6 @@ const postsModule = {
     lim: 7,
     paginationPages: null,
     postsPerPage: 7,
-    totalPosts: null
   },
   mutations: {
     SET_POSTS(state, response) {
@@ -17,8 +16,9 @@ const postsModule = {
     SET_SEARCH(state, response) {
       state.search = response
     },
-    NEW_LIMIT(state, response) {
+    SET_NEW_LIMIT(state, response) {
       state.lim = response
+      state.postsPerPage = response
     },
     SET_PAGINATION_PAGES(state, response) {
       state.paginationPages = Math.ceil(response/state.postsPerPage)
@@ -30,23 +30,24 @@ const postsModule = {
       console.log(state.posts);
       return state.posts;
     },
-    GET_POSTS_LENGTH(state) {
-      console.log(state.posts);
-      return state.posts.length;
-    },
+
     GET_SEARCH(state) {
       console.log(state.search);
       return state.search;
     },
     GET_PAGINATION_PAGES (state) {
       console.log(state.paginationPages);
-      return Math.ceil(state.paginationPages);
+      return state.paginationPages;
     }
 
   },
   actions: {
     ACTION_SEARCH({ commit }, value) {
       commit("SET_SEARCH", value);
+    },
+
+    ACTION_NEW_LIMIT({commit}, val) {
+      commit("SET_NEW_LIMIT", val)
     },
 
     ACTION_POSTS({ commit, state }, page) {

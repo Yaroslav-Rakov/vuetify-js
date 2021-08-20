@@ -36,9 +36,6 @@ export default {
   computed: {
     ...mapGetters(["GET_POSTS","GET_POSTS_LENGTH","GET_PAGINATION_PAGES"]),
 
-    // paginationLength() {
-    //     return Math.ceil(this.GET_PAGINATION_PAGES / this.postsNumber);
-    // },
   },
   methods: {
     myInput() {
@@ -50,10 +47,8 @@ export default {
     changePostsNumber(val) {
       if (val.length > 0 && val > 0) {
         this.postsNumber = val;
-        this.$store.commit("NEW_LIMIT", parseInt(val));
+        this.$store.dispatch("ACTION_NEW_LIMIT", parseInt(val));
         this.$store.dispatch("ACTION_POSTS", this.page);
-        this.$store.dispatch("ACTION_PAGINATION_PAGES", this.page);
-
       }
       console.log(val);
     },
