@@ -4,7 +4,6 @@ const postsModule = {
   state: {
     posts: [],
     search: "",
-    routePage: 1,
     postsLimit: 7,
     paginationPages: null,
   },

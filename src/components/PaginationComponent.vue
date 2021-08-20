@@ -5,7 +5,7 @@
                   <v-pagination
                     v-model="page"
                     :length="this.$store.state.postsModule.paginationPages"
-                    @input="myInput()"
+                    @input="changePage()"
                   ></v-pagination>
               </v-col>
               <v-col cols="2">
@@ -30,7 +30,7 @@
           v-for="(item, index) in items"
           :key="index"
         >
-          <v-list-item-title @click="changePostsNumber(item.title)">{{ item.title }}</v-list-item-title>
+          <v-list-item-title @click="changePostsLimit(item.title)">{{ item.title }}</v-list-item-title>
         </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -75,20 +75,11 @@ export default {
     setValue: function (value) {
       this.page = value;
     },
-    myInput() {
-      this.$store.state.postsModule.routePage = this.page;
-      console.log("Current page: " + this.page);
-      this.$store.dispatch("ACTION_POSTS", this.page);
-      this.$router.push({ path: "", query: { page: this.page } });
-      console.log("Query: " + this.$route.query.page);
+    changePage() {
+      this.$emit("changePage", this.page);
     },
-    changePostsNumber(val) {
-      if (val > 0) {
-        this.$store.state.postsModule.routePage = this.page;
-        this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", parseInt(val));
-        this.$store.dispatch("ACTION_POSTS", this.page);
-      }
-      console.log(val);
+    changePostsLimit(val) {
+      this.$emit("changePostsLimit", this.page, val);
     },
   },
 };

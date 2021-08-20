@@ -5,7 +5,11 @@
         <SearchComponent @search="onSearch" @clear="onClear" />
         <PostsComponent />
         <v-spacer></v-spacer>
-        <PaginationComponent ref="paginationReset"/>
+        <PaginationComponent
+          ref="paginationReset"
+          @changePage="changePage"
+          @changePostsLimit="changePostsLimit"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -43,6 +47,16 @@ export default {
       this.$store.dispatch("ACTION_SEARCH", null);
       this.$store.dispatch("ACTION_POSTS", 1);
       this.$refs.paginationReset.setValue(1);
+    },
+    changePage(page) {
+      console.log("Current page: " + page);
+      this.$store.dispatch("ACTION_POSTS", page);
+      this.$router.push({ path: "", query: { page: page } });
+      console.log("Query: " + this.$route.query.page);
+    },
+    changePostsLimit(page, val) {
+      this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", val);
+      this.$store.dispatch("ACTION_POSTS", page);
     },
   },
 };
