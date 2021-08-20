@@ -61,8 +61,8 @@ export default {
   created() {
     this.page = parseInt(this.$route.query.page);
     console.log("Url page: " + this.$route.query.page);
-    // this.$store.commit("SET_PAGE_URL", this.$route.query.page);
-    this.$store.dispatch("ACTION_POSTS", this.page);
+    this.$store.commit("SET_PAGE_URL", this.page);
+    this.$store.dispatch("ACTION_POSTS");
   },
 
   computed: {

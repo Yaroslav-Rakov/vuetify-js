@@ -54,7 +54,7 @@ const postsModule = {
     ACTION_POSTS({ commit, state }, page) {
       console.log('inside ACTION_POSTS function');
       let search = 'search='+state.search+'&';
-        if (!page) page = 1;
+        if (!page) page = state.pageUrl;
         if (!state.search) search ='';
         api.get("posts?"+ search +"limit=" + state.postsLimit + '&skip=' + (page - 1) * state.postsLimit)
           .then((response) => {

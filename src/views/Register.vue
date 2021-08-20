@@ -135,11 +135,6 @@ export default {
       }
     },
 
-    validate() {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
-      }
-    },
     reset() {
       this.$refs.form.reset();
     },
