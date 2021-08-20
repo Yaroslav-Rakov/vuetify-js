@@ -58,6 +58,11 @@ export default {
       this.page = val;
     },
   },
+  created(){
+    this.page = parseInt(this.$route.query.page);
+    console.log("Url page: "+this.page);
+    this.$store.dispatch("ACTION_POSTS", this.page)
+  },
 
   computed: {
     ...mapGetters(["GET_POSTS", "GET_POSTS_LENGTH", "GET_PAGINATION_PAGES"]),
@@ -72,15 +77,15 @@ export default {
     // }
   },
   methods: {
-    setValue: function (value) {
-      this.page = value;
+    setPage(page) {
+      this.page = page;
     },
     changePage() {
       this.$emit("changePage", this.page);
     },
-    changePostsLimit(val) {
-      this.$emit("changePostsLimit", this.page, val);
-    },
+    changePostsLimit(postsLimit) {
+      this.$emit("changePostsLimit", this.page, postsLimit);
+    }
   },
 };
 </script>
