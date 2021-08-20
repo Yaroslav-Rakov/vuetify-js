@@ -1,7 +1,7 @@
 <template lang="">
           <v-container>
             <v-row class="my-4" justify="center">
-              <v-col cols="7">
+              <v-col cols="5">
                   <v-pagination
                     v-model="page"
                     :length="this.$store.state.postsModule.paginationPages"
@@ -9,12 +9,32 @@
                   ></v-pagination>
               </v-col>
               <v-col cols="2">
-          <v-text-field
-            label="Posts on page"
-            outlined
-            @input="changePostsNumber"
-          >
-          </v-text-field>
+    <v-menu
+      top
+      :offset-y="offset"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn class="my-1"
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Pages
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item-group>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+        >
+          <v-list-item-title @click="changePostsNumber(item.title)">{{ item.title }}</v-list-item-title>
+        </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-menu>
                 </v-col>
 
             </v-row>
@@ -29,13 +49,13 @@ export default {
   data() {
     return {
       page: 1,
-      postsNumber: 7,
+      items: [{ title: 12 }, { title: 9 }, { title: 7 }, { title: 5 }],
+      offset: true,
     };
   },
 
   computed: {
-    ...mapGetters(["GET_POSTS","GET_POSTS_LENGTH","GET_PAGINATION_PAGES"]),
-
+    ...mapGetters(["GET_POSTS", "GET_POSTS_LENGTH", "GET_PAGINATION_PAGES"]),
   },
   methods: {
     myInput() {
@@ -45,8 +65,7 @@ export default {
       console.log("Query: " + this.$route.query.page);
     },
     changePostsNumber(val) {
-      if (val.length > 0 && val > 0) {
-        this.postsNumber = val;
+      if (val > 0) {
         this.$store.dispatch("ACTION_NEW_LIMIT", parseInt(val));
         this.$store.dispatch("ACTION_POSTS", this.page);
       }
