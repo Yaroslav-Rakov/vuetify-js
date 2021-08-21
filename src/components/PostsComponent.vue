@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="GET_POSTS.length !== 0">
         <v-card
       class="mb-1"
       v-for="(item, index) in GET_POSTS"
@@ -15,6 +15,10 @@
       <v-divider class="mt-3"></v-divider>
     </v-card>
   </div>
+  <div class="text-h4" v-else>
+      Please choose another page
+     
+  </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -26,7 +30,10 @@ export default {
     return {
 
     };
-  },
+        },
+    created() {
+
+        },
  
   computed: {
     ...mapGetters(["GET_SEARCH", "GET_POSTS"]),

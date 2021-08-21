@@ -75,7 +75,7 @@ const postsModule = {
       commit("SET_NEW_POSTS_LIMIT", val)
     },
 
-    ACTION_POSTS({ commit, state }, page) {
+      ACTION_POSTS({ commit, state,  }, page) {
       console.log('inside ACTION_POSTS function');
       let search = 'search='+state.search+'&';
         if (page) {
@@ -88,12 +88,12 @@ const postsModule = {
         api.get("posts?" + search + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
           .then((response) => {
               commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES", response.data.pagination.total);
-      //        if (response.data.data.length === 0) {
-      //            state.pageUrl--;
-      //            router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: router.query.perPage } });
-       //
-     //             dispatch('ACTION_POSTS');
-      //        }
+         //     if (response.data.data.length === 0) {
+         //         state.pageUrl--
+            //      router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: router.query.perPage } });
+       
+          //        dispatch('ACTION_POSTS');
+          //    }
           }).catch((error) => {
             console.error("There was an error!", error);
           });

@@ -26,14 +26,15 @@ export default {
   components: { PostsComponent, SearchComponent, PaginationComponent },
 
   data() {
-    return {
-   //   urlPage: null
+      return {
+
     };
         },
         mounted() {
 
-          //  let savePage = this.$store.state.postsModule.postsLimit ? this.$store.state.postsModule.postsLimit : 7
-          //  this.$store.commit("SET_NEW_POSTS_LIMIT", savePage);
+        },
+        beforeDestroy() {
+            this.$store.state.postsModule.search = ''
         },
 
         created() {
@@ -55,7 +56,7 @@ export default {
   methods: {
     onSearch(search) {
       this.$store.dispatch("ACTION_SEARCH", search);
-      this.$store.dispatch("ACTION_POSTS", search);
+      this.$store.dispatch("ACTION_POSTS");
       this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
     },
     onClear() {
@@ -67,22 +68,26 @@ export default {
     changePage(page) {
       console.log("Current page: " + page);
       this.$store.state.postsModule.pageUrl = page;
-      this.$store.dispatch("ACTION_POSTS", page);
-      this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
+        this.$store.dispatch("ACTION_POSTS", page);
+        if (this.$store.state.postsModule.search.length > 0) {
+            this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
+        } else {
+            this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
+        }
       console.log("Query: " + this.$route.query.page);
     },
     changePostsLimit(page, postsLimit) {
       this.$store.state.postsModule.pageUrl = page;
         this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
         this.$store.dispatch("ACTION_POSTS", page);
-        console.log(this.GET_POSTS.length + 'LENGTH');
-        this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit } });
-    
-       
+        if (this.$store.state.postsModule.search.length > 0) {
+            this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit, search: this.$store.state.postsModule.search } });
+        } else {
+            this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit } });
+        }
+
     },
-    // pageFromUrl(){
-    //   this.$refs.pageFromUrl.setPage(this.urlPage);
-    // }
+
   },
 };
 </script>
