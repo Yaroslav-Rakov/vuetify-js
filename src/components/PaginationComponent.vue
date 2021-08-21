@@ -43,15 +43,15 @@ export default {
 
   data() {
     return {
-      page: this.$store.state.postsModule.pageUrl,
+    //  page: this.$store.state.postsModule.pageUrl,
       items: [{ title: 12 }, { title: 9 }, { title: 7 }, { title: 5 }],
       offset: true
     };
   },
   watch: {
-    page: function (val) {
-      this.page = val;
-      },
+  //  page: function (val) {
+  //    this.page = val;
+  //    },
   },
   created() {
     // this.page = parseInt(this.$route.query.page);
@@ -71,16 +71,19 @@ export default {
          set(val) {
               this.$store.state.postsModule.postsLimit = val;
           }
-      }
+      },
 
-    // page: {
-    //   get() {
-    //     {
-    //         return this.$store.state.postsModule.routePage
-    //     }
-    //   }
+      page: {
+          set(val) {
+              this.$store.state.postsModule.pageUrl = val;
+          },
+       get() {
+         {
+             return this.$store.state.postsModule.pageUrl
+         }
+       }
 
-    // }
+    }
   },
   methods: {
     setPage(page) {

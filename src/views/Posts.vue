@@ -39,8 +39,8 @@ export default {
 
         created() {
    
-             this.page = parseInt(this.$route.query.page);
-       //     this.page = parseInt(this.$store.state.postsModule.pageUrl);
+         //    this.page = parseInt(this.$route.query.page);
+           this.page = parseInt(this.$store.state.postsModule.pageUrl);
     this.perPage = parseInt(this.$route.query.perPage);
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
@@ -79,7 +79,7 @@ export default {
     changePostsLimit(page, postsLimit) {
       this.$store.state.postsModule.pageUrl = page;
         this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
-        this.$store.dispatch("ACTION_POSTS", page);
+        this.$store.dispatch("ACTION_POSTS");
         if (this.$store.state.postsModule.search.length > 0) {
             this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit, search: this.$store.state.postsModule.search } });
         } else {

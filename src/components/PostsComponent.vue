@@ -1,24 +1,41 @@
 <template>
-  <div v-if="GET_POSTS.length !== 0">
-        <v-card
-      class="mb-1"
-      v-for="(item, index) in GET_POSTS"
-      :key="index"
-    >
-      <v-card-title>{{ item.title }}</v-card-title>
-      <v-card-text>{{ item.description }}</v-card-text>
-      <v-card-actions class="justify-space-between">
-        <v-btn class="ml-2" depressed medium color="indigo" dark>
-          Read now
-        </v-btn>
-      </v-card-actions>
-      <v-divider class="mt-3"></v-divider>
-    </v-card>
-  </div>
-  <div class="text-h4" v-else>
-      Please choose another page
-     
-  </div>
+    <div v-if="GET_POSTS.length !== 0">
+        <v-menu left
+                :offset-x="offset">
+
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn class="my-1"
+                       color="primary"
+                       dark
+                       v-bind="attrs"
+                       v-on="on">
+                    Sort
+                </v-btn>
+            </template>
+
+            <v-list>
+                <v-list-item-group>
+                    <v-list-item v-for="(item, index) in items"
+                                 :key="index">
+                        <v-list-item-title @click="sort(item.title)">{{ item.title }}</v-list-item-title>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
+        </v-menu>
+        <v-card class="mb-1"
+                v-for="(item, index) in GET_POSTS"
+                :key="index">
+            <v-card-title>{{ item.title }}</v-card-title>
+            <v-card-text>{{ item.description }}</v-card-text>
+            <v-card-actions class="justify-space-between">
+                <v-btn class="ml-2" depressed medium color="indigo" dark>
+                    Read now
+                </v-btn>
+            </v-card-actions>
+            <v-divider class="mt-3"></v-divider>
+        </v-card>
+    </div>
+
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -28,7 +45,8 @@ export default {
 
   data() {
     return {
-
+        items: [{ title: "By title" }, { title: "By description" }, { title: "New posts first" }, { title: "Old posts first" }],
+        offset: true
     };
         },
     created() {
@@ -45,7 +63,12 @@ export default {
     },
   
   },
-  methods: {
+        methods: {
+            sort() {
+              //  if (this.items.title === 'By title') {
+//
+              //  }
+            }
   },
 };
 </script>
