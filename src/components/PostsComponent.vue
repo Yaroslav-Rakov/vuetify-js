@@ -44,8 +44,8 @@ export default {
   name: "PostsComponent",
 
   data() {
-    return {
-        items: [{ title: "By title" }, { title: "By description" }, { title: "New posts first" }, { title: "Old posts first" }],
+      return {
+          items: this.$store.state.postsModule.sort,
         offset: true
     };
         },
@@ -65,8 +65,9 @@ export default {
   
   },
         methods: {
-            sort() {
-   
+            sort(item) {
+                console.log("Sort: "+item);
+                this.$emit('sort', item);
             }
   },
 };

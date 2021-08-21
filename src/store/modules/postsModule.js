@@ -8,7 +8,9 @@ const postsModule = {
     postsLimit: 7,
     paginationPages: null,
     pageUrl: 1,
-    totalPosts: null
+    totalPosts: null,
+    sort: [{ title: "By title" }, { title: "By description" }, { title: "New posts first" }, { title: "Old posts first" }],
+    sortChoice: ""
   },
   mutations: {
     SET_POSTS(state, posts) {
@@ -28,7 +30,10 @@ const postsModule = {
       },
     SET_PAGE_URL(state, pageUrl) {
       state.pageUrl = pageUrl
-    }
+      },
+      SET_SORT(state, choice) {
+          state.sortChoice = choice
+      }
 
   },
   getters: {
@@ -59,12 +64,30 @@ const postsModule = {
     GET_PAGINATION_PAGES (state) {
       console.log(state.paginationPages);
       return state.paginationPages;
-    }
+      },
+      GET_SORT(state) {
+        if (state.sortChoice === 'By title') {
+            state.posts.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
+        }
+        if (state.sortChoice === 'By description') {
+            state.posts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ? 1 : -1)
+        }
+        if (state.sortChoice === 'New posts first') {
+            state.posts.sort((a, b) => (a.dateCreated.toLowerCase() > b.dateCreated.toLowerCase()) ? 1 : -1)
+          }
+        if (state.sortChoice === 'Old posts first') {
+            state.posts.sort((a, b) => (a.dateCreated < b.dateCreated) ? 1 : -1)
+          }
+          return state.posts;
+      }
 
   },
   actions: {
     ACTION_SEARCH({ commit }, value) {
       commit("SET_SEARCH", value);
+      },
+      ACTION_SORT({ commit }, value) {
+          commit("SET_SORT", value);
       },
 
      ACTION_PAGE_URL({ commit }, value) {
@@ -92,7 +115,7 @@ const postsModule = {
               commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES", response.data.pagination.total);
               if (response.data.data.length === 0) {
                   console.log('POSTS length from ACTION: ' + response.data.data.length);
-                  if (state.search.length > 0) {
+                  if (state.search && state.search.length > 0) {
                       router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
                   } else {
                       router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });

@@ -3,7 +3,7 @@
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
         <SearchComponent @search="onSearch" @clear="onClear" />
-        <PostsComponent />
+        <PostsComponent @sort="sort" />
         <v-spacer></v-spacer>
         <PaginationComponent
           ref="paginationReset"
@@ -38,11 +38,11 @@ export default {
         },
 
         created() {
-            if (this.GET_POSTS.length === 0) {
+            if (this.GET_POSTS && this.GET_POSTS.length === 0) {
                 this.page = parseInt(this.$store.state.postsModule.pageUrl);
             }
             this.page = parseInt(this.$route.query.page);
-            if (this.$store.state.postsModule.search.length === 0) {
+            if (this.$store.state.postsModule.search && this.$store.state.postsModule.search.length === 0) {
                 this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage, search: this.$route.query.search} });
             }
 
@@ -80,7 +80,7 @@ export default {
       console.log("Current page: " + page);
       this.$store.state.postsModule.pageUrl = page;
         this.$store.dispatch("ACTION_POSTS", page);
-        if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {
+        if (this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0) {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
         } else {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
@@ -91,13 +91,16 @@ export default {
       this.$store.state.postsModule.pageUrl = page;
         this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
         this.$store.dispatch("ACTION_POSTS");
-        if (this.$store.state.postsModule.search.length > 0) {
+        if (this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0) {
             this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit, search: this.$store.state.postsModule.search } });
         } else {
             this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit } });
         }
 
-    },
+      },
+      sort(sort) {
+          this.$store.dispatch('ACTION_SORT', sort);
+      }
 
   },
 };

@@ -6,8 +6,9 @@
     "\\src\\plugins",
     "\\src\\router",
     "\\src\\store",
+    "\\src\\store\\modules",
     "\\src\\views"
   ],
-  "SelectedNode": "\\src\\components\\PaginationComponent.vue",
+  "SelectedNode": "\\src\\views\\Posts.vue",
   "PreviewInSolutionExplorer": false
 }
