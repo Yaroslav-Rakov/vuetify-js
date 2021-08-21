@@ -27,28 +27,39 @@ export default {
 
   data() {
     return {
-      urlPage: null
+   //   urlPage: null
     };
-  },
+        },
+        mounted() {
 
-  created() {
-    this.page = parseInt(this.$route.query.page);
-    console.log("Url page: " + this.$route.query.page);
-    this.$store.commit("SET_PAGE_URL", this.page);
+          //  let savePage = this.$store.state.postsModule.postsLimit ? this.$store.state.postsModule.postsLimit : 7
+          //  this.$store.commit("SET_NEW_POSTS_LIMIT", savePage);
+        },
+
+        created() {
+   
+             this.page = parseInt(this.$route.query.page);
+       //     this.page = parseInt(this.$store.state.postsModule.pageUrl);
+    this.perPage = parseInt(this.$route.query.perPage);
+    this.$store.dispatch("ACTION_PAGE_URL", this.page);
+    this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
     this.$store.dispatch("ACTION_POSTS");
+    this.$store.dispatch("ACTION_TOTAL_POSTS");
+
   },
 
   computed: {
-    ...mapGetters(["GET_POSTS"]),
+    ...mapGetters(["GET_POSTS", "GET_TOTAL_POSTS", "GET_PAGINATION_PAGES"]),
   },
 
   methods: {
     onSearch(search) {
       this.$store.dispatch("ACTION_SEARCH", search);
       this.$store.dispatch("ACTION_POSTS", search);
+      this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
     },
     onClear() {
-      this.$router.push({ path: "", query: { page: 1 } });
+      this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage } });
       this.$store.dispatch("ACTION_SEARCH", null);
       this.$store.dispatch("ACTION_POSTS", 1);
       this.$refs.paginationReset.setPage(1);
@@ -57,13 +68,17 @@ export default {
       console.log("Current page: " + page);
       this.$store.state.postsModule.pageUrl = page;
       this.$store.dispatch("ACTION_POSTS", page);
-      this.$router.push({ path: "", query: { page: page } });
+      this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
       console.log("Query: " + this.$route.query.page);
     },
     changePostsLimit(page, postsLimit) {
       this.$store.state.postsModule.pageUrl = page;
-      this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
-      this.$store.dispatch("ACTION_POSTS", page);
+        this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", postsLimit);
+        this.$store.dispatch("ACTION_POSTS", page);
+        console.log(this.GET_POSTS.length + 'LENGTH');
+        this.$router.push({ path: "", query: { page: this.$store.state.postsModule.pageUrl, perPage: postsLimit } });
+    
+       
     },
     // pageFromUrl(){
     //   this.$refs.pageFromUrl.setPage(this.urlPage);

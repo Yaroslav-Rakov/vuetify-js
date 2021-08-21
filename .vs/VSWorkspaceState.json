@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\components",
     "\\src\\plugins",
     "\\src\\router",
-    "\\src\\store"
+    "\\src\\store",
+    "\\src\\views"
   ],
-  "SelectedNode": "\\src\\store\\api.js",
+  "SelectedNode": "\\src\\components\\PaginationComponent.vue",
   "PreviewInSolutionExplorer": false
 }

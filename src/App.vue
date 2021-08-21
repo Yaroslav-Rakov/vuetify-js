@@ -4,7 +4,7 @@
       <v-container class="py-0 fill-height my-class">
         <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
         <v-btn color="white" to="/" text>Home</v-btn>
-        <v-btn color="white" v-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl }}" text
+        <v-btn color="white" v-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage  }}" text
           >Posts</v-btn
         >
         <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/login" text
@@ -96,11 +96,10 @@ export default {
     };
   },
   computed: {
-    routePage: {
-      get () {
-        return this.$store.state.postsModule.routePage
+
+      perPage() {
+          return this.$store.state.postsModule.postsLimit
       }
-    },
 
 
   },

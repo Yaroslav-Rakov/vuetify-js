@@ -18,8 +18,9 @@ new Vue({
   router,
   store,
   vuetify,
-  mounted() {
-console.log(process.env.VUE_APP_BASE_URI);
+  created() {
+      console.log(process.env.VUE_APP_BASE_URI);
+    
   },
   render: h => h(App)
 }).$mount('#app')

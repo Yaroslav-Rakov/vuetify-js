@@ -9,34 +9,29 @@
                   ></v-pagination>
               </v-col>
               <v-col cols="2">
-    <v-menu
-      top
-      :offset-y="offset"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn class="my-1"
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Posts
-        </v-btn>
-      </template>
+                  <v-menu top
+                          :offset-y="offset">
 
-      <v-list>
-        <v-list-item-group>
-        <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-        >
-          <v-list-item-title @click="changePostsLimit(item.title)">{{ item.title }}</v-list-item-title>
-        </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-menu>
-                </v-col>
+                      <template v-slot:activator="{ on, attrs }">
+                              <v-btn class="my-1"
+                                     color="primary"
+                                     dark
+                                     v-bind="attrs"
+                                     v-on="on">
+                                  {{currentPosts}}
+                              </v-btn>
+                      </template>
 
+                      <v-list>
+                          <v-list-item-group>
+                              <v-list-item v-for="(item, index) in items"
+                                           :key="index">
+                                  <v-list-item-title @click="changePostsLimit(item.title)">{{ item.title }}</v-list-item-title>
+                              </v-list-item>
+                          </v-list-item-group>
+                      </v-list>
+                  </v-menu>
+              </v-col>
             </v-row>
           </v-container>
 </template>
@@ -50,23 +45,33 @@ export default {
     return {
       page: this.$store.state.postsModule.pageUrl,
       items: [{ title: 12 }, { title: 9 }, { title: 7 }, { title: 5 }],
-      offset: true,
+      offset: true
     };
   },
   watch: {
     page: function (val) {
       this.page = val;
-    },
+      },
   },
   created() {
     // this.page = parseInt(this.$route.query.page);
     // console.log("Url page: " + this.$route.query.page);
     // this.$store.commit("SET_PAGE_URL", this.page);
-    // this.$store.dispatch("ACTION_POSTS");
+      // this.$store.dispatch("ACTION_POSTS");
   },
 
   computed: {
     ...mapGetters(["GET_POSTS", "GET_POSTS_LENGTH", "GET_PAGINATION_PAGES"]),
+
+
+      currentPosts: {
+          get() {
+              return this.$store.state.postsModule.postsLimit
+          },
+         set(val) {
+              this.$store.state.postsModule.postsLimit = val;
+          }
+      }
 
     // page: {
     //   get() {
