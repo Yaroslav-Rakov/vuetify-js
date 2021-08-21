@@ -45,8 +45,11 @@ export default {
             if (this.$store.state.postsModule.search.length === 0) {
                 this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage} });
             }
+          
+            console.log('perPage: ' + this.$route.query.perPage);
+           // console.log('SEARCH: ' + this.$store.state.postsModule.search);
 
-    this.perPage = parseInt(this.$route.query.perPage);
+    this.perPage = this.$route.query.perPage;
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
     this.$store.dispatch("ACTION_POSTS");
@@ -74,7 +77,7 @@ export default {
       console.log("Current page: " + page);
       this.$store.state.postsModule.pageUrl = page;
         this.$store.dispatch("ACTION_POSTS", page);
-        if (this.$store.state.postsModule.search.length > 0) {
+        if (this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0) {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
         } else {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });

@@ -4,7 +4,7 @@
         <v-container class="py-0 fill-height my-class">
             <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
             <v-btn color="white" to="/" text>Home</v-btn>
-            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage, search: search }}" text>Posts</v-btn>
+            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search !== null && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage, search: search }}" text>Posts</v-btn>
             <v-btn color="white" v-else :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>Posts</v-btn>
             <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/login" text>Login</v-btn>
             <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/register" text>Register</v-btn>
