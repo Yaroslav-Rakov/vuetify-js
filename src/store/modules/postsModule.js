@@ -90,9 +90,11 @@ const postsModule = {
               commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES", response.data.pagination.total);
               if (response.data.data.length === 0) {
                   console.log('POSTS length from ACTION: ' + response.data.data.length);
-                //  state.pageUrl--
-                  router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });
-       
+                  if (state.search.length > 0) {
+                      router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
+                  } else {
+                      router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });
+                  }
                   dispatch('ACTION_POSTS', 1);
               }
           }).catch((error) => {
