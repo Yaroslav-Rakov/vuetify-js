@@ -43,10 +43,13 @@ export default {
             }
             this.page = parseInt(this.$route.query.page);
             if (this.$store.state.postsModule.search.length === 0) {
-                this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage} });
+                this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage, search: this.$route.query.search} });
             }
-          
+
+            this.$store.state.postsModule.search = this.$route.query.search
             console.log('perPage: ' + this.$route.query.perPage);
+            console.log('Search: ' + this.$route.query.search);
+
            // console.log('SEARCH: ' + this.$store.state.postsModule.search);
 
     this.perPage = this.$route.query.perPage;

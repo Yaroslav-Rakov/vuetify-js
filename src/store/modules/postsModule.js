@@ -1,5 +1,5 @@
 import api from '../api.js'
- import router from '@/router'
+import router  from '@/router'
 
 const postsModule = {
   state: {
@@ -76,7 +76,9 @@ const postsModule = {
     },
 
       ACTION_POSTS({ commit, state, dispatch }, page) {
-      console.log('inside ACTION_POSTS function');
+          console.log('inside ACTION_POSTS function');
+         // console.log('Check router search: ' + route.query);
+
       let search = 'search='+state.search+'&';
         if (page) {
             state.pageUrl = page
