@@ -54,7 +54,8 @@ export default {
         },
  
   computed: {
-    ...mapGetters(["GET_SEARCH", "GET_POSTS"]),
+      ...mapGetters(["GET_SEARCH", "GET_POSTS"]),
+
 
     search: {
       get () {
@@ -65,9 +66,7 @@ export default {
   },
         methods: {
             sort() {
-              //  if (this.items.title === 'By title') {
-//
-              //  }
+   
             }
   },
 };

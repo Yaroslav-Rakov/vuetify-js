@@ -33,14 +33,19 @@ export default {
         mounted() {
 
         },
-        beforeDestroy() {
-            this.$store.state.postsModule.search = ''
+        destroyed() {
+         //   this.$store.state.postsModule.search = ''
         },
 
         created() {
-   
-         //    this.page = parseInt(this.$route.query.page);
-           this.page = parseInt(this.$store.state.postsModule.pageUrl);
+            if (this.GET_POSTS.length === 0) {
+                this.page = parseInt(this.$store.state.postsModule.pageUrl);
+            }
+            this.page = parseInt(this.$route.query.page);
+            if (this.$store.state.postsModule.search.length === 0) {
+                this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage} });
+            }
+
     this.perPage = parseInt(this.$route.query.perPage);
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);

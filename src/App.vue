@@ -1,37 +1,29 @@
 <template>
   <v-app id="#app">
     <v-app-bar app color="indigo" depressed>
-      <v-container class="py-0 fill-height my-class">
-        <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
-        <v-btn color="white" to="/" text>Home</v-btn>
-        <v-btn color="white" v-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage  }}" text
-          >Posts</v-btn
-        >
-        <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/login" text
-          >Login</v-btn
-        >
-        <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/register" text
-          >Register</v-btn
-        >
-        <v-btn
-          color="white"
-          v-else-if="this.$store.state.userModule.token"
-          @click.native="resetToken"
-          to="/login"
-          text
-          >Log Out</v-btn
-        >
+        <v-container class="py-0 fill-height my-class">
+            <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
+            <v-btn color="white" to="/" text>Home</v-btn>
+            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage, search: search }}" text>Posts</v-btn>
+            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search === ''|| this.$store.state.postsModule.search === null" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>Posts</v-btn>
+            <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/login" text>Login</v-btn>
+            <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/register" text>Register</v-btn>
+            <v-btn color="white"
+                   v-else-if="this.$store.state.userModule.token"
+                   @click.native="resetToken"
+                   to="/login"
+                   text>Log Out</v-btn>
 
-        <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-        <!--            <v-responsive max-width="260">
-                <v-text-field dense
-                              flat
-                              hide-details
-                              rounded
-                              solo-inverted></v-text-field>
-            </v-responsive>-->
-      </v-container>
+            <!--            <v-responsive max-width="260">
+            <v-text-field dense
+                          flat
+                          hide-details
+                          rounded
+                          solo-inverted></v-text-field>
+        </v-responsive>-->
+        </v-container>
     </v-app-bar>
 
     <v-main class="grey lighten-3">
@@ -99,6 +91,14 @@ export default {
 
       perPage() {
           return this.$store.state.postsModule.postsLimit
+      },
+
+      search() {
+          if (this.$store.state.postsModule.search.length > 0) {
+              return this.$store.state.postsModule.search
+          } else {
+              return ''
+          }
       }
 
 
