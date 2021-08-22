@@ -33,6 +33,18 @@ const postsModule = {
       },
       SET_SORT(state, choice) {
           state.sortChoice = choice
+          if (state.sortChoice === 'By title') {
+              state.posts.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
+          }
+          if (state.sortChoice === 'By description') {
+              state.posts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ? 1 : -1)
+          }
+          if (state.sortChoice === 'New posts first') {
+              state.posts.sort((a, b) => (a.dateCreated.toLowerCase() > b.dateCreated.toLowerCase()) ? 1 : -1)
+          }
+          if (state.sortChoice === 'Old posts first') {
+              state.posts.sort((a, b) => (a.dateCreated < b.dateCreated) ? 1 : -1)
+          }
       }
 
   },
@@ -64,21 +76,6 @@ const postsModule = {
     GET_PAGINATION_PAGES (state) {
       console.log(state.paginationPages);
       return state.paginationPages;
-      },
-      GET_SORT(state) {
-        if (state.sortChoice === 'By title') {
-            state.posts.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
-        }
-        if (state.sortChoice === 'By description') {
-            state.posts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ? 1 : -1)
-        }
-        if (state.sortChoice === 'New posts first') {
-            state.posts.sort((a, b) => (a.dateCreated.toLowerCase() > b.dateCreated.toLowerCase()) ? 1 : -1)
-          }
-        if (state.sortChoice === 'Old posts first') {
-            state.posts.sort((a, b) => (a.dateCreated < b.dateCreated) ? 1 : -1)
-          }
-          return state.posts;
       }
 
   },

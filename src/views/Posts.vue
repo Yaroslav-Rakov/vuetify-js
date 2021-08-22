@@ -57,6 +57,7 @@ export default {
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
     this.$store.dispatch("ACTION_POSTS");
     this.$store.dispatch("ACTION_TOTAL_POSTS");
+    
 
   },
 
