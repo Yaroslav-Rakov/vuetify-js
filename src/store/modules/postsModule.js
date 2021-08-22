@@ -115,9 +115,9 @@ const postsModule = {
                   if (state.search && state.search.length > 0) {
                       router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
                   } else {
-                      router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });
+                      router.push({ path: "", query: { page: state.paginationPages, perPage: state.postsLimit } });
                   }
-                  dispatch('ACTION_POSTS', 1);
+                  dispatch('ACTION_POSTS', state.paginationPages);
               }
           }).catch((error) => {
             console.error("There was an error!", error);
