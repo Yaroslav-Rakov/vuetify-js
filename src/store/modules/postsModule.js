@@ -97,7 +97,6 @@ const postsModule = {
 
       ACTION_POSTS({ commit, state, dispatch }, page) {
           console.log('inside ACTION_POSTS function');
-         // console.log('Check router search: ' + route.query);
 
       let search = 'search='+state.search+'&';
         if (page) {
