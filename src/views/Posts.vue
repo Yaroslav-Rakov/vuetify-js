@@ -55,9 +55,10 @@ export default {
     this.perPage = this.$route.query.perPage;
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
+   // this.$store.dispatch('ACTION_SORT', this.$store.state.postsModule.sortChoice);
+
     this.$store.dispatch("ACTION_POSTS");
     this.$store.dispatch("ACTION_TOTAL_POSTS");
-    
 
   },
 
@@ -72,7 +73,7 @@ export default {
       this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage, search: this.$store.state.postsModule.search } });
     },
     onClear() {
-      this.$router.push({ path: "", query: { page: this.$route.query.page, perPage: this.$route.query.perPage } });
+      this.$router.push({ path: "", query: { page: 1, perPage: this.$route.query.perPage } });
       this.$store.dispatch("ACTION_SEARCH", null);
       this.$store.dispatch("ACTION_POSTS", 1);
       this.$refs.paginationReset.setPage(1);

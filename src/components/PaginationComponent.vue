@@ -65,14 +65,14 @@ export default {
           get() {
               return this.$store.state.postsModule.postsLimit
           },
-         set(val) {
-              this.$store.state.postsModule.postsLimit = val;
+          set(postsLimit) {
+              this.$store.state.postsModule.postsLimit = postsLimit;
           }
       },
 
       page: {
-          set(val) {
-              this.$store.state.postsModule.pageUrl = val;
+          set(pageUrl) {
+              this.$store.state.postsModule.pageUrl = pageUrl;
           },
        get() {
          {

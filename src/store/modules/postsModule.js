@@ -9,8 +9,9 @@ const postsModule = {
     paginationPages: null,
     pageUrl: 1,
     totalPosts: null,
-    sort: [{ title: "By title" }, { title: "By description" }, { title: "New posts first" }, { title: "Old posts first" }],
-    sortChoice: ""
+    sort: [{ title: "By title" }, { title: "By description" }, { title: "Old posts" }, { title: "New posts" }],
+        sortChoice: '',
+        goToLastPage: false
   },
   mutations: {
     SET_POSTS(state, posts) {
@@ -31,20 +32,9 @@ const postsModule = {
     SET_PAGE_URL(state, pageUrl) {
       state.pageUrl = pageUrl
       },
-      SET_SORT(state, choice) {
-          state.sortChoice = choice
-          if (state.sortChoice === 'By title') {
-              state.posts.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
-          }
-          if (state.sortChoice === 'By description') {
-              state.posts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ? 1 : -1)
-          }
-          if (state.sortChoice === 'New posts first') {
-              state.posts.sort((a, b) => (a.dateCreated.toLowerCase() > b.dateCreated.toLowerCase()) ? 1 : -1)
-          }
-          if (state.sortChoice === 'Old posts first') {
-              state.posts.sort((a, b) => (a.dateCreated < b.dateCreated) ? 1 : -1)
-          }
+      SET_SORT(state, sort) {
+          state.sortChoice = sort
+ 
       }
 
   },
@@ -79,24 +69,49 @@ const postsModule = {
       }
 
   },
-  actions: {
-    ACTION_SEARCH({ commit }, value) {
-      commit("SET_SEARCH", value);
-      },
-      ACTION_SORT({ commit }, value) {
-          commit("SET_SORT", value);
+    actions: {
+        ACTION_SEARCH({ commit }, search ) {
+            commit("SET_SEARCH", search);
+        },
+        ACTION_SORT({ commit, state, dispatch }, sort) {
+            commit('SET_SORT', sort);
+         //   if (state.goToLastPage === true && state.sortChoice !== 'New posts first') state.goToLastPage = false
+          if (state.sortChoice === 'By title') {
+              state.posts.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
+          }
+          if (state.sortChoice === 'By description') {
+              state.posts.sort((a, b) => (a.description.toLowerCase() > b.description.toLowerCase()) ? 1 : -1)
+          }
+            if (state.sortChoice === 'New posts') {
+                console.log(router.currentRoute.params)
+                state.posts.sort((a, b) => (a.dateCreated < b.dateCreated) ? 1 : -1)
+                if (state.goToLastPage === false) {
+                  //  if (state.search && state.search.length > 0) {
+                  //      router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
+                 //   } else {
+                    router.push({ path: "", query: { page: state.paginationPages, perPage: state.postsLimit, search: state.search } });
+                  //  }
+                }
+                if (state.goToLastPage === false) {
+                    state.goToLastPage = true;
+                    dispatch('ACTION_POSTS', state.paginationPages);
+                }
+          }
+          if (state.sortChoice === 'Old posts') {
+              state.posts.sort((a, b) => (a.dateCreated > b.dateCreated) ? 1 : -1)
+          }
       },
 
-     ACTION_PAGE_URL({ commit }, value) {
-          commit("SET_PAGE_URL", value);
+     ACTION_PAGE_URL({ commit }, pageUrl) {
+         commit("SET_PAGE_URL", pageUrl);
       },
 
-    ACTION_NEW_POSTS_LIMIT({commit}, val) {
-      commit("SET_NEW_POSTS_LIMIT", val)
+    ACTION_NEW_POSTS_LIMIT({commit}, postsLimit) {
+        commit("SET_NEW_POSTS_LIMIT", postsLimit)
     },
 
       ACTION_POSTS({ commit, state, dispatch }, page) {
-          console.log('inside ACTION_POSTS function');
+       console.log('inside ACTION_POSTS function');
 
       let search = 'search='+state.search+'&';
         if (page) {
@@ -118,6 +133,8 @@ const postsModule = {
                   }
                   dispatch('ACTION_POSTS', state.paginationPages);
               }
+              if (!state.sortChoice) state.sortChoice = 'Old posts'
+              dispatch('ACTION_SORT', state.sortChoice, state.goToLastPage);
           }).catch((error) => {
             console.error("There was an error!", error);
           });

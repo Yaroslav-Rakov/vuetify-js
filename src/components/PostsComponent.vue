@@ -9,7 +9,7 @@
                        dark
                        v-bind="attrs"
                        v-on="on">
-                    Sort
+                    Sort: {{sortButtonText}}
                 </v-btn>
             </template>
 
@@ -46,7 +46,7 @@ export default {
   data() {
       return {
           items: this.$store.state.postsModule.sort,
-        offset: true
+          offset: true
     };
         },
     created() {
@@ -61,7 +61,10 @@ export default {
       get () {
         return this.$store.state.postsModule.search
       }
-    },
+      },
+      sortButtonText() {
+          return this.$store.state.postsModule.sortChoice
+      }
   
   },
         methods: {
