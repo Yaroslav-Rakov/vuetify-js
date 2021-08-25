@@ -87,6 +87,7 @@ export default {
         } else {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
         }
+        // window.scrollTo(0,0);
       console.log("Query: " + this.$route.query.page);
     },
     changePostsLimit(page, postsLimit) {

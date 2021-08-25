@@ -50,7 +50,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior () {
+    return { x: 0, y: 0, behavior: 'smooth' }
+  }
 })
 
 router.beforeEach((to, from, next) => {
