@@ -13,6 +13,32 @@
                    @click.native="resetToken"
                    to="/login"
                    text>Log Out</v-btn>
+    <v-menu class="float-right"
+      offset-y
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Account
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+  
+        >
+          <v-list-item-title v-if="!this.$store.state.userModule.token" to="/login" text>Login</v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title v-if="!this.$store.state.userModule.token" to="/register" text>Register</v-list-item-title>
+
+        </v-list-item>
+      </v-list>
+    </v-menu>
 
             <v-spacer></v-spacer>
 
