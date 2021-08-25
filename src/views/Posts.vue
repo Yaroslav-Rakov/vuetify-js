@@ -3,7 +3,7 @@
     <v-row class="album p-1">
       <v-col cols="6" md="9" class="mx-auto mt-6">
         <SearchComponent @search="onSearch" @clear="onClear" />
-        <PostsComponent @sort="sort" />
+        <PostsComponent @sort="sort" @readMore="readMore" />
         <v-spacer></v-spacer>
         <PaginationComponent
           ref="paginationReset"
@@ -102,6 +102,9 @@ export default {
       },
       sort(sort) {
           this.$store.dispatch('ACTION_SORT', sort);
+      },
+      readMore(post) {
+        this.$store.dispatch('ACTION_POST_DATA', post);
       }
 
   },

@@ -1,0 +1,49 @@
+<template>
+  <v-container>
+    <v-row>
+      <v-btn @click="goBack">Go back</v-btn>
+      <v-col cols="12" md="12" class="mx-auto mt-6">
+        <v-card elevation="2" outlined shaped tile>
+          <v-card-title>{{ GET_POST_DATA.title }}</v-card-title>
+          <v-card-text>{{ GET_POST_DATA.description }}</v-card-text>
+          <v-card-text>{{ GET_POST_DATA.fullText }}</v-card-text>
+          <v-card-text>Likes: {{ GET_POST_DATA.likes.length }}</v-card-text>
+          <v-card-text>Posted by {{ GET_POST_DATA._id }} </v-card-text>
+          <v-card-text>{{ date }}</v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  data() {
+    return {};
+  },
+  created() {},
+
+  computed: {
+    ...mapGetters(["GET_POST_DATA"]),
+
+    date() {
+      const date = new Date(this.GET_POST_DATA.dateCreated);
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      console.log(date);
+      return date.toLocaleDateString("en-EN", options);
+    },
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+  },
+};
+</script>

@@ -38,7 +38,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "posts" */ '../views/Posts.vue'),
       meta: { requiresAuth: true }
 
-  }
+  },
+  {
+    path: '/post/:id',
+    name: 'Post',
+
+    component: () => import(/* webpackChunkName: "post" */ '../views/Post.vue')
+},
 ]
 
 const router = new VueRouter({

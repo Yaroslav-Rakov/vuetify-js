@@ -28,8 +28,8 @@
             <v-card-title>{{ item.title }}</v-card-title>
             <v-card-text>{{ item.description }}</v-card-text>
             <v-card-actions class="justify-space-between">
-                <v-btn class="ml-2" depressed medium color="indigo" dark>
-                    Read now
+                <v-btn @click="readMore(item._id)" class="ml-2" depressed medium color="indigo" dark>
+                    Read more
                 </v-btn>
             </v-card-actions>
             <v-divider class="mt-3"></v-divider>
@@ -71,6 +71,9 @@ export default {
             sort(item) {
                 console.log("Sort: "+item);
                 this.$emit('sort', item);
+            },
+            readMore(post) {
+                this.$emit('readMore', post);
             }
   },
 };
