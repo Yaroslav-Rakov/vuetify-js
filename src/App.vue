@@ -13,7 +13,7 @@
                    @click.native="resetToken"
                    to="/login"
                    text>Log Out</v-btn>
-    <v-menu class="float-right"
+    <v-menu class=""
       offset-y
     >
       <template v-slot:activator="{ on, attrs }">
