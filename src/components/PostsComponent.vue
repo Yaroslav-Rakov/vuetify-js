@@ -27,10 +27,10 @@
                 :key="index">
             <v-card-title>{{ item.title }}</v-card-title>
             <v-card-text>{{ item.description }}</v-card-text>
-            <v-card-actions class="justify-space-between">
+            <v-card-actions class="">
                 <v-btn @click="readMore(item._id)" class="ml-2" depressed medium color="indigo" dark>
                     Read more
-                </v-btn>
+                </v-btn><v-card-text class="d-flex justify-end">{{ item.dateCreated }}</v-card-text>
             </v-card-actions>
             <v-divider class="mt-3"></v-divider>
         </v-card>
