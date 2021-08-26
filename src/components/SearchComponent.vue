@@ -18,12 +18,13 @@
         :flat="flat"
         :counter="counterEn ? counter : false"
         :dense="dense"
+        @input="onSearch"
       >
         <template v-slot:append>
           <v-icon class="ml-3" aria-hidden="false" @click="clear"
             >mdi-close
           </v-icon>
-          <v-icon class="ml-3" aria-hidden="false" @click="clickSearch"
+          <v-icon class="ml-3" aria-hidden="false" @click="onSearch"
             >mdi-text-search
           </v-icon>
         </template>
@@ -68,7 +69,8 @@ export default {
   },
   methods: {
     ...mapActions(["ACTION_POSTS", "ACTION_SEARCH"]),
-    clickSearch() {
+
+    onSearch() {
       this.$emit("search", this.search);
       console.log("searched");
     },

@@ -44,7 +44,7 @@
           <v-list-item-title><v-btn  to="/" text>Dashboard</v-btn></v-list-item-title>
         </v-list-item>
                   <v-list-item v-if="this.$store.state.userModule.token">
-          <v-list-item-title><v-btn :to="{path: '/my-posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>My posts</v-btn></v-list-item-title>
+          <v-list-item-title><v-btn :to="{path: '/my-posts', query: { id: GET_AUTH_DATA._id, page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>My posts</v-btn></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -114,6 +114,7 @@
 
 import store from "./store/store.js";
 import { clearAccessToken } from "./store/auth.js";
+import {mapGetters} from 'vuex'
 
 export default {
 
@@ -123,6 +124,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['GET_AUTH_DATA']),
 
       perPage() {
           return this.$store.state.postsModule.postsLimit

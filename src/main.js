@@ -19,6 +19,7 @@ new Vue({
   store,
   vuetify,
   created() {
+ 
       console.log(process.env.VUE_APP_BASE_URI);
   },
   render: h => h(App)

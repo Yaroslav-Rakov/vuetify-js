@@ -12,8 +12,7 @@ const postsModule = {
     sort: [{ title: "By title" }, { title: "By description" }, { title: "Old posts" }, { title: "New posts" }],
     sortChoice: '',
     //  goToLastPage: false,
-    postData: null,
-    postedBy: ''
+    postData: null
   },
   mutations: {
     SET_POSTS(state, posts) {
@@ -28,7 +27,7 @@ const postsModule = {
         let date = new Date(x.dateCreated)
         x.dateCreated = date.toLocaleDateString("en-EN", options)
       })
- 
+
     },
     SET_SEARCH(state, search) {
       state.search = search
@@ -128,7 +127,7 @@ const postsModule = {
       commit("SET_NEW_POSTS_LIMIT", postsLimit)
     },
 
-    ACTION_POSTS({ commit, state, dispatch }, page) {
+    ACTION_POSTS({ commit, state, rootState, dispatch }, page, postedBy) {
       console.log('inside ACTION_POSTS function');
 
       let search = 'search=' + state.search + '&';
@@ -137,19 +136,22 @@ const postsModule = {
       } else {
         page = state.pageUrl
       }
-
-      if(router.currentRoute.path === 'my-posts') {
-        state.postedBy = '&postedBy=' + this.$store.state.userModule.userAuthData._id
+      console.log('Current router path: ' + router.currentRoute.path);
+      
+      if (router.currentRoute.path === '/my-posts') {
+         postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
+         console.log('state.postedBy: ' + postedBy);
+        console.log('My id: ' + rootState.userModule.userAuthData._id);
       } else {
-        state.postedBy = '';
+        // postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
+        postedBy = '';
       }
-
+   
       if (!state.search) search = '';
-      api.get("posts?" + search + state.postedBy + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
+      api.get("posts?" + search + postedBy + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
         .then((response) => {
           commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES", response.data.pagination.total);
           if (response.data.data.length === 0) {
-            console.log('POSTS length from ACTION: ' + response.data.data.length);
             if (state.search && state.search.length > 0) {
               router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
             } else {
@@ -157,6 +159,7 @@ const postsModule = {
             }
             dispatch('ACTION_POSTS', 1);
           }
+
           if (!state.sortChoice) state.sortChoice = 'Old posts'
           //  dispatch('ACTION_SORT', state.sortChoice, state.goToLastPage);
           dispatch('ACTION_SORT', state.sortChoice);
@@ -165,14 +168,14 @@ const postsModule = {
         });
     },
 
-    ACTION_TOTAL_POSTS({ commit }) {
-      api.get("posts")
-        .then((response) => {
-          commit("SET_TOTAL_POSTS", response.data.pagination.total)
-        }).catch((error) => {
-          console.error("There was an error!", error);
-        });
-    },
+    // ACTION_TOTAL_POSTS({ commit }) {
+    //   api.get("posts")
+    //     .then((response) => {
+    //       commit("SET_TOTAL_POSTS", response.data.pagination.total)
+    //     }).catch((error) => {
+    //       console.error("There was an error!", error);
+    //     });
+    // },
     ACTION_POST_DATA({ commit }, id) {
       api.get("posts/" + id).then((response) => {
         commit("SET_POST_DATA", response.data), router.push({ path: 'post/' + id })

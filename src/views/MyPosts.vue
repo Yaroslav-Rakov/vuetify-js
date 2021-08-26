@@ -1,19 +1,32 @@
 <template>
-  <v-container>
-    <v-row class="album p-1">
-      <v-col cols="6" md="9" class="mx-auto mt-6">
-        <Posts />
-      </v-col>
-    </v-row>
-  </v-container>
+  <Posts />
 </template>
 <script>
-import Posts from '@/views/Posts.vue';
+import Posts from "@/views/Posts.vue";
+import { mapGetters } from "vuex";
 
 export default {
-    components: {Posts}
-}
+  components: { Posts },
+  data() {
+    return {};
+  },
+  created() {
+    this.$router.push({
+      path: "",
+      query: {
+        id: this.$route.query.id,
+        page: this.$route.query.page,
+        perPage: this.$route.query.perPage,
+      },
+    });
+ 
+    console.log("MY ID: " + this.$route.query.id);
+    this.$store.dispatch("ACTION_AUTH_DATA");
+    // this.$store.dispatch("ACTION_POSTS", 1, this.$route.query.id);
+    console.log("Router path: " + this.$router.currentRoute.path);
+  },
+  computed: {
+    ...mapGetters(["GET_AUTH_DATA", "GET_POSTS"]),
+  },
+};
 </script>
-<style lang="">
-    
-</style>

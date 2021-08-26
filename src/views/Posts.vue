@@ -56,8 +56,7 @@ export default {
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
    // this.$store.dispatch('ACTION_SORT', this.$store.state.postsModule.sortChoice);
-
-    this.$store.dispatch("ACTION_POSTS");
+  //  this.$store.dispatch("ACTION_POSTS");
   //  this.$store.dispatch("ACTION_TOTAL_POSTS");
 
   },
@@ -87,7 +86,6 @@ export default {
         } else {
             this.$router.push({ path: "", query: { page: page, perPage: this.$route.query.perPage } });
         }
-        // window.scrollTo(0,0);
       console.log("Query: " + this.$route.query.page);
     },
     changePostsLimit(page, postsLimit) {
