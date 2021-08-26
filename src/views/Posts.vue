@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="album p-1">
-      <v-col cols="6" md="9" class="mx-auto mt-6">
+      <v-col cols="auto" md="9" lg="9" class="mx-auto mt-6">
         <SearchComponent @search="onSearch" @clear="onClear" />
         <PostsComponent @sort="sort" @readMore="readMore" />
         <v-spacer></v-spacer>
@@ -109,3 +109,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.column_wrapper {
+  column-count: 2;
+}
+</style>

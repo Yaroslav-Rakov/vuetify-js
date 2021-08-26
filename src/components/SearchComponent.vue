@@ -18,13 +18,13 @@
         :flat="flat"
         :counter="counterEn ? counter : false"
         :dense="dense"
-        @input="onSearch"
+        @input="debounceSearch"
       >
         <template v-slot:append>
           <v-icon class="ml-3" aria-hidden="false" @click="clear"
             >mdi-close
           </v-icon>
-          <v-icon class="ml-3" aria-hidden="false" @click="onSearch"
+          <v-icon class="ml-3" aria-hidden="false"
             >mdi-text-search
           </v-icon>
         </template>
@@ -34,6 +34,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import debounce from 'lodash/debounce';
 
 export default {
   name: "SearchComponent",
@@ -73,6 +74,10 @@ export default {
     onSearch() {
       this.$emit("search", this.search);
       console.log("searched");
+    },
+
+    debounceSearch() {
+      return debounce(this.onSearch, 2000)
     },
 
     clear() {

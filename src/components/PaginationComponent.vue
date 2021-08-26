@@ -44,7 +44,7 @@ export default {
   data() {
     return {
     //  page: this.$store.state.postsModule.pageUrl,
-      items: [{ title: 12 }, { title: 9 }, { title: 7 }, { title: 5 }],
+      items: [{ title: 12 }, { title: 10 }, { title: 8 }, { title: 6 }],
       offset: true
     };
   },

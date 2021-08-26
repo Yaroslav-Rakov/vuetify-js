@@ -22,7 +22,8 @@
                 </v-list-item-group>
             </v-list>
         </v-menu>
-        <v-card class="mb-1"
+<div class="d-flex flex-wrap">
+        <v-card max-width="300" class="mb-2 mr-10"
                 v-for="(item, index) in GET_POSTS"
                 :key="index">
             <v-card-title>{{ item.title }}</v-card-title>
@@ -32,10 +33,10 @@
                     Read more
                 </v-btn><v-card-text class="d-flex justify-end">{{ item.dateCreated }}</v-card-text>
             </v-card-actions>
-            <v-divider class="mt-3"></v-divider>
+            <!-- <v-divider class="mt-3"></v-divider> -->
         </v-card>
     </div>
-
+</div>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -78,4 +79,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.column_wrapper {
+  column-count: 2;
+}
+</style>
 
