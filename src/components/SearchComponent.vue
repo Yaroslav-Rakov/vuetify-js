@@ -41,7 +41,7 @@ export default {
 
   data() {
     return {
-      search: null,
+      search: this.$store.state.postsModule.search,
       label: "",
       hint: "",
       placeholder: "",
@@ -78,11 +78,7 @@ export default {
 
     debounceSearch: debounce(function () {
       this.$emit("search", this.search);
-    }, 3000),
-
-    // debounceSearch() {
-    //   return debounce(this.onSearch, 2000)
-    // },
+    }, 500),
 
     clear() {
       this.search = null;

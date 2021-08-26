@@ -111,7 +111,5 @@ export default {
 </script>
 
 <style scoped>
-.column_wrapper {
-  column-count: 2;
-}
+
 </style>

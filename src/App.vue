@@ -23,29 +23,35 @@
       </template>
 
       <v-list>
-        <v-list-item v-if="!this.$store.state.userModule.token"
-  
-        >
-          <v-list-item-title><v-btn  to="/login" text>Login</v-btn> </v-list-item-title>  </v-list-item>
-                      <v-list-item v-else-if="this.$store.state.userModule.token"> <v-list-item-title> <v-btn 
-                   
-                   @click.native="resetToken"
-                   to="/login"
-                   text>Log Out</v-btn>
-          </v-list-item-title>
-        </v-list-item>
-        <v-list-item  v-if="!this.$store.state.userModule.token">
-          <v-list-item-title><v-btn  to="/register" text>Register</v-btn></v-list-item-title>
-        </v-list-item >
-                <v-list-item v-if="this.$store.state.userModule.token">
-          <v-list-item-title><v-btn  to="/profile" text>Profile</v-btn></v-list-item-title>
-        </v-list-item>
-                <v-list-item v-if="this.$store.state.userModule.token">
-          <v-list-item-title><v-btn  to="/" text>Dashboard</v-btn></v-list-item-title>
-        </v-list-item>
-                  <v-list-item v-if="this.$store.state.userModule.token">
-          <v-list-item-title><v-btn :to="{path: '/my-posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>My posts</v-btn></v-list-item-title>
-        </v-list-item>
+          <v-list-item v-if="!this.$store.state.userModule.token">
+              <v-list-item-title><v-btn to="/login" text>Login</v-btn> </v-list-item-title>
+          </v-list-item>
+          <v-list-item v-else-if="this.$store.state.userModule.token">
+              <v-list-item-title>
+                  <v-btn @click.native="resetToken"
+                         to="/login"
+                         text>Log Out</v-btn>
+              </v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="!this.$store.state.userModule.token">
+              <v-list-item-title><v-btn to="/register" text>Register</v-btn></v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="this.$store.state.userModule.token">
+              <v-list-item-title><v-btn to="/profile" text>Profile</v-btn></v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="this.$store.state.userModule.token">
+              <v-list-item-title><v-btn to="/" text>Dashboard</v-btn></v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0">
+              <v-list-item-title>
+                  <v-btn :to="{path: '/my-posts', query: { page: pageQuery, perPage: perPage, search: search }}" text>My posts</v-btn>
+              </v-list-item-title>
+          </v-list-item>
+          <v-list-item v-else-if="this.$store.state.userModule.token">
+              <v-list-item-title>
+                  <v-btn :to="{path: '/my-posts', query: { page: pageQuery, perPage: perPage }}" text>My posts</v-btn>
+              </v-list-item-title>
+          </v-list-item>
       </v-list>
     </v-menu>
 </div>

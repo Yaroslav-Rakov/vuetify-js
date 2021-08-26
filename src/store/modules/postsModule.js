@@ -159,8 +159,10 @@ const postsModule = {
               router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
             } else {
               router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });
-            }
-            dispatch('ACTION_POSTS', 1);
+              }
+              if (state.pageUrl !== 1) {
+                dispatch('ACTION_POSTS', 1);
+              }
           }
 
           if (!state.sortChoice) state.sortChoice = 'Old posts'
