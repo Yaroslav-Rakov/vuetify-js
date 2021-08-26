@@ -9,6 +9,6 @@
     "\\src\\store\\modules",
     "\\src\\views"
   ],
-  "SelectedNode": "\\src\\main.js",
+  "SelectedNode": "\\src\\store\\modules\\postsModule.js",
   "PreviewInSolutionExplorer": false
 }

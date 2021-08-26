@@ -5,7 +5,7 @@ const postsModule = {
   state: {
     posts: [],
     search: "",
-    postsLimit: 7,
+    postsLimit: 6,
     paginationPages: null,
     pageUrl: 1,
     //totalPosts: 7,
@@ -140,9 +140,9 @@ const postsModule = {
       
       if (router.currentRoute.path === '/my-posts') {
         console.log(rootState.userModule.userAuthData._id );
-        if(rootState.userModule.userAuthData._id ){
+       
           postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
-        }
+        
           console.log('state.postedBy: ' + postedBy);
         console.log('My id: ' + rootState.userModule.userAuthData._id);
       } else {

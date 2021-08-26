@@ -10,7 +10,7 @@ export default {
   data() {
     return {};
   },
-  async created() {
+  created() {
     this.$router.push({
       path: "",
       query: {
@@ -21,9 +21,7 @@ export default {
     });
  
     console.log("MY ID: " + this.$route.query.id);
-    await this.$store.dispatch("ACTION_AUTH_DATA");
-    console.log('HYI');
-     this.$store.dispatch("ACTION_POSTS");
+      this.$store.dispatch("ACTION_AUTH_DATA").then(action => { this.$store.dispatch(action) });
     console.log("Router path: " + this.$router.currentRoute.path);
   },
   computed: {

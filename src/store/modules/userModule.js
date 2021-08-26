@@ -54,13 +54,23 @@ const userModule = {
         });
   
       },
-      ACTION_AUTH_DATA({ commit }) {
+        ACTION_AUTH_DATA({ commit }) {
+       return new Promise((resolve, reject) => {
         console.log('ACTION_AUTH_DATA works');
         if (getAccessToken()) {
           api.get('auth/user', {
             headers: { authorization: getAccessToken() },
-          }).then(response => { commit('SET_AUTH_DATA', response.data) })
-        }
+          }).then(response => {
+              commit('SET_AUTH_DATA', response.data);
+              resolve('ACTION_POSTS');
+          })
+              .catch((error) => {
+                  console.error("There was an error!", error);
+                  reject(error);
+              });
+           }
+       });
+
       },
     }
   }
