@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="album p-1">
-      <v-col cols="auto" md="9" lg="9" class="mx-auto mt-6">
+      <v-col cols="auto" md="10" lg="10" class="mx-auto mt-6">
         <SearchComponent @search="onSearch" @clear="onClear" />
         <PostsComponent @sort="sort" @readMore="readMore" />
         <v-spacer></v-spacer>

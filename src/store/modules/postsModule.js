@@ -128,8 +128,8 @@ const postsModule = {
     },
 
     ACTION_POSTS({ commit, state, rootState, dispatch }, page, postedBy) {
+      // debugger
       console.log('inside ACTION_POSTS function');
-
       let search = 'search=' + state.search + '&';
       if (page) {
         state.pageUrl = page
@@ -139,14 +139,17 @@ const postsModule = {
       console.log('Current router path: ' + router.currentRoute.path);
       
       if (router.currentRoute.path === '/my-posts') {
-         postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
-         console.log('state.postedBy: ' + postedBy);
+        console.log(rootState.userModule.userAuthData._id );
+        if(rootState.userModule.userAuthData._id ){
+          postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
+        }
+          console.log('state.postedBy: ' + postedBy);
         console.log('My id: ' + rootState.userModule.userAuthData._id);
       } else {
         // postedBy = 'postedBy=' + rootState.userModule.userAuthData._id + '&'
         postedBy = '';
       }
-   
+    
       if (!state.search) search = '';
       api.get("posts?" + search + postedBy + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
         .then((response) => {

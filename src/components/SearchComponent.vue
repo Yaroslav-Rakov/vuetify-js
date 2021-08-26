@@ -72,13 +72,17 @@ export default {
     ...mapActions(["ACTION_POSTS", "ACTION_SEARCH"]),
 
     onSearch() {
-      this.$emit("search", this.search);
+      
       console.log("searched");
     },
 
-    debounceSearch() {
-      return debounce(this.onSearch, 2000)
-    },
+    debounceSearch: debounce(function () {
+      this.$emit("search", this.search);
+    }, 3000),
+
+    // debounceSearch() {
+    //   return debounce(this.onSearch, 2000)
+    // },
 
     clear() {
       this.search = null;
