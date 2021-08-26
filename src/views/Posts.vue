@@ -22,7 +22,7 @@ import SearchComponent from "@/components/SearchComponent.vue";
 import PaginationComponent from "@/components/PaginationComponent.vue";
 
 export default {
-  name: "PostsView",
+  name: "Posts",
   components: { PostsComponent, SearchComponent, PaginationComponent },
 
   data() {
@@ -58,7 +58,7 @@ export default {
    // this.$store.dispatch('ACTION_SORT', this.$store.state.postsModule.sortChoice);
 
     this.$store.dispatch("ACTION_POSTS");
-    this.$store.dispatch("ACTION_TOTAL_POSTS");
+  //  this.$store.dispatch("ACTION_TOTAL_POSTS");
 
   },
 

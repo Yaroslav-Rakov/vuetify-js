@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="goBack">Go back</v-btn>
       <v-col cols="12" md="12" class="mx-auto mt-6">
         <v-card elevation="2" outlined shaped tile>
           <v-card-title>{{ GET_POST_DATA.title }}</v-card-title>
@@ -41,9 +40,7 @@ export default {
     },
   },
   methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
+
   },
 };
 </script>

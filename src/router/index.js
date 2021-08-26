@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Dashboard from '../views/Dashboard.vue'
 import store from '../store/store.js'
 
 
@@ -9,14 +9,15 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: { requiresAuth: true }
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/profile',
+    name: 'Profile',
 
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
     },
     {
         path: '/login',
@@ -39,6 +40,15 @@ const routes = [
       meta: { requiresAuth: true }
 
   },
+  {
+    path: '/my-posts',
+    name: 'MyPosts',
+    props: true,
+
+      component: () => import(/* webpackChunkName: "MyPosts" */ '../views/MyPosts.vue'),
+    meta: { requiresAuth: true }
+
+},
   {
     path: '/post/:id',
     name: 'Post',

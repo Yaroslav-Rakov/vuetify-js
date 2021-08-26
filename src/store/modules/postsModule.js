@@ -8,11 +8,12 @@ const postsModule = {
     postsLimit: 7,
     paginationPages: null,
     pageUrl: 1,
-    totalPosts: null,
+    //totalPosts: 7,
     sort: [{ title: "By title" }, { title: "By description" }, { title: "Old posts" }, { title: "New posts" }],
     sortChoice: '',
     //  goToLastPage: false,
-    postData: null
+    postData: null,
+    postedBy: ''
   },
   mutations: {
     SET_POSTS(state, posts) {
@@ -137,8 +138,14 @@ const postsModule = {
         page = state.pageUrl
       }
 
+      if(router.currentRoute.path === 'my-posts') {
+        state.postedBy = '&postedBy=' + this.$store.state.userModule.userAuthData._id
+      } else {
+        state.postedBy = '';
+      }
+
       if (!state.search) search = '';
-      api.get("posts?" + search + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
+      api.get("posts?" + search + state.postedBy + "limit=" + state.postsLimit + '&skip=' + (state.pageUrl - 1) * state.postsLimit)
         .then((response) => {
           commit('SET_POSTS', response.data.data), commit("SET_PAGINATION_PAGES", response.data.pagination.total);
           if (response.data.data.length === 0) {
@@ -146,9 +153,9 @@ const postsModule = {
             if (state.search && state.search.length > 0) {
               router.push({ path: "", query: { page: 1, perPage: state.postsLimit, search: state.search } });
             } else {
-              router.push({ path: "", query: { page: state.paginationPages, perPage: state.postsLimit } });
+              router.push({ path: "", query: { page: 1, perPage: state.postsLimit } });
             }
-            dispatch('ACTION_POSTS', state.paginationPages);
+            dispatch('ACTION_POSTS', 1);
           }
           if (!state.sortChoice) state.sortChoice = 'Old posts'
           //  dispatch('ACTION_SORT', state.sortChoice, state.goToLastPage);

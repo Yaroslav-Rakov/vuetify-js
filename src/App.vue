@@ -1,19 +1,14 @@
 <template>
   <v-app id="#app">
     <v-app-bar app color="indigo" depressed>
-        <v-container class="py-0 fill-height my-class">
+        <v-container class="py-0">
             <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
-            <v-btn color="white" to="/" text>Home</v-btn>
-            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage, search: search }}" text>Posts</v-btn>
-            <v-btn color="white" v-else-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>Posts</v-btn>
-            <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/login" text>Login</v-btn>
-            <v-btn color="white" v-if="!this.$store.state.userModule.token" to="/register" text>Register</v-btn>
-            <v-btn color="white"
-                   v-else-if="this.$store.state.userModule.token"
-                   @click.native="resetToken"
-                   to="/login"
-                   text>Log Out</v-btn>
-    <v-menu class=""
+            <v-btn color="white" v-if="this.$store.state.userModule.token" to="/" text>Dashboard</v-btn>
+            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage, search: search }}" text>Posts</v-btn>
+            <v-btn color="white" v-else-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage }}" text>Posts</v-btn>
+
+                   <div class="float-right">
+    <v-menu 
       offset-y
     >
       <template v-slot:activator="{ on, attrs }">
@@ -28,18 +23,32 @@
       </template>
 
       <v-list>
-        <v-list-item
+        <v-list-item v-if="!this.$store.state.userModule.token"
   
         >
-          <v-list-item-title v-if="!this.$store.state.userModule.token" to="/login" text>Login</v-list-item-title>
+          <v-list-item-title><v-btn  to="/login" text>Login</v-btn> </v-list-item-title>  </v-list-item>
+                      <v-list-item v-else-if="this.$store.state.userModule.token"> <v-list-item-title> <v-btn 
+                   
+                   @click.native="resetToken"
+                   to="/login"
+                   text>Log Out</v-btn>
+          </v-list-item-title>
         </v-list-item>
-        <v-list-item>
-          <v-list-item-title v-if="!this.$store.state.userModule.token" to="/register" text>Register</v-list-item-title>
-
+        <v-list-item  v-if="!this.$store.state.userModule.token">
+          <v-list-item-title><v-btn  to="/register" text>Register</v-btn></v-list-item-title>
+        </v-list-item >
+                <v-list-item v-if="this.$store.state.userModule.token">
+          <v-list-item-title><v-btn  to="/profile" text>Profile</v-btn></v-list-item-title>
+        </v-list-item>
+                <v-list-item v-if="this.$store.state.userModule.token">
+          <v-list-item-title><v-btn  to="/" text>Dashboard</v-btn></v-list-item-title>
+        </v-list-item>
+                  <v-list-item v-if="this.$store.state.userModule.token">
+          <v-list-item-title><v-btn :to="{path: '/my-posts', query: { page: this.$store.state.postsModule.pageUrl, perPage: perPage }}" text>My posts</v-btn></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
-
+</div>
             <v-spacer></v-spacer>
 
             <!--            <v-responsive max-width="260">
@@ -118,6 +127,9 @@ export default {
       perPage() {
           return this.$store.state.postsModule.postsLimit
       },
+      pageQuery() {
+        return this.$store.state.postsModule.pageUrl ? this.$store.state.postsModule.pageUrl : 1
+      },
 
       search() {
           if (this.$store.state.postsModule.search.length > 0) {
@@ -141,4 +153,7 @@ export default {
 </script>
 
 <style scoped>
+.m-auto {
+  margin-left: auto;
+}
 </style>

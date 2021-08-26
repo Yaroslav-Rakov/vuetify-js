@@ -45,7 +45,7 @@ const userModule = {
             .post("auth", user)
             .then((response) => {
               commit('SET_TOKEN', response.data.token);
-              resolve({ name: 'Home' });
+              resolve({ name: 'Dashboard' });
             })
             .catch((error) => {
               console.error("There was an error!", error);
