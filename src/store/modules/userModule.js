@@ -1,3 +1,4 @@
+import router from '@/router'
 import api from '../api.js'
 import { getAccessToken, setAccessToken } from '../auth.js'
 
@@ -62,7 +63,12 @@ const userModule = {
             headers: { authorization: getAccessToken() },
           }).then(response => {
               commit('SET_AUTH_DATA', response.data);
-              resolve('ACTION_POSTS');
+              console.log('Router path from AUTH_DATA: '+router.currentRoute.path);
+              if(router.currentRoute.path === '/my-posts'){
+                resolve('ACTION_POSTS');
+              } else if (router.currentRoute.path === '/post' || router.currentRoute.path === '/post/edit') {
+                resolve('ACTION_POST_DATA');
+              }
           })
               .catch((error) => {
                   console.error("There was an error!", error);

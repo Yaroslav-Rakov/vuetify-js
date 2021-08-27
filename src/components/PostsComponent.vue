@@ -26,8 +26,8 @@
       >
         <v-card-title>
           <span class="truncate-title">{{ item.title }}</span>
-          <v-icon
-            @click="editPost(item.postedBy)"
+          <v-icon v-if="item.postedBy === GET_AUTH_DATA._id"
+            @click="readMore(item._id)"
             class="ml-6"
             aria-hidden="false"
             >mdi-pencil
@@ -69,7 +69,7 @@ export default {
   created() {},
 
   computed: {
-    ...mapGetters(["GET_SEARCH", "GET_POSTS"]),
+    ...mapGetters(["GET_SEARCH", "GET_POSTS", "GET_AUTH_DATA"]),
 
     search: {
       get() {
@@ -87,10 +87,7 @@ export default {
     },
     readMore(post) {
       this.$emit("readMore", post);
-    },
-    editPost(post) {
-      this.$emit("editPost", post);
-    },
+    }
   },
 };
 </script>

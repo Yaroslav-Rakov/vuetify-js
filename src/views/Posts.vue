@@ -3,7 +3,7 @@
     <v-row class="album p-1">
       <v-col cols="auto" md="10" lg="10" class="mx-auto mt-6">
         <SearchComponent @search="onSearch" @clear="onClear" />
-        <PostsComponent @sort="sort" @readMore="readMore" @editPost="editPost" />
+        <PostsComponent @sort="sort" @readMore="readMore" />
         <v-spacer></v-spacer>
         <PaginationComponent
           ref="paginationReset"
@@ -61,6 +61,7 @@ export default {
     this.perPage = this.$route.query.perPage;
     this.$store.dispatch("ACTION_PAGE_URL", this.page);
     this.$store.dispatch("ACTION_NEW_POSTS_LIMIT", this.perPage);
+    this.$store.dispatch("ACTION_AUTH_DATA");
     // this.$store.dispatch('ACTION_SORT', this.$store.state.postsModule.sortChoice);
     //  this.$store.dispatch("ACTION_POSTS");
     //  this.$store.dispatch("ACTION_TOTAL_POSTS");
@@ -145,12 +146,9 @@ export default {
     sort(sort) {
       this.$store.dispatch("ACTION_SORT", sort);
     },
-    readMore(post) {
-      this.$store.dispatch("ACTION_POST_DATA", post);
-    },
-    editPost(post) {
-      this.$store.dispatch("ACTION_EDIT_POST_DATA", post);
-    },
+    readMore(id) {
+      this.$store.dispatch("ACTION_POST_DATA", id);
+    }
   },
 };
 </script>

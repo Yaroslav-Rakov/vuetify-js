@@ -7,7 +7,7 @@
           <v-card-text>{{ GET_POST_DATA.description }}</v-card-text>
           <v-card-text>{{ GET_POST_DATA.fullText }}</v-card-text>
           <v-card-text>Likes: {{ GET_POST_DATA.likes.length }}</v-card-text>
-          <v-card-text>Posted by {{ GET_POST_DATA._id }} </v-card-text>
+          <v-card-text>Posted by {{ GET_POST_DATA.postedBy }} </v-card-text>
           <v-card-text>{{ date }}</v-card-text>
         </v-card>
       </v-col>
@@ -22,7 +22,11 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+     this.$store.dispatch("ACTION_AUTH_DATA").then(post => { this.$store.dispatch(post, this.$route.query.id) });
+     console.log('Router query from Post.vue: '+this.$route.query.id);
+  //  this.$store.dispatch("ACTION_POST_DATA", this.$route.query.id);
+  },
 
   computed: {
     ...mapGetters(["GET_POST_DATA"]),

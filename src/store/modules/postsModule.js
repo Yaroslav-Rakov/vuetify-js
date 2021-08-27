@@ -1,5 +1,6 @@
 import api from '../api.js'
 import router from '@/router'
+import { getAccessToken } from '../auth.js'
 
 const postsModule = {
   state: {
@@ -181,9 +182,25 @@ const postsModule = {
     //       console.error("There was an error!", error);
     //     });
     // },
-    ACTION_POST_DATA({ commit }, id) {
+    ACTION_POST_DATA({ commit, rootState }, id) {
       api.get("posts/" + id).then((response) => {
-        commit("SET_POST_DATA", response.data), router.push({ path: 'post/' + id })
+        commit("SET_POST_DATA", response.data); 
+        if(response.data.postedBy === rootState.userModule.userAuthData._id) {
+          console.log('Current path from postsModule: '+router.currentRoute.path);
+          router.push({ path: 'post', query: {id: id, edit: true} })
+        } else {
+          router.push({ path: 'post', query: {id: id} })
+        }
+      
+      }).catch((error) => {
+        console.error("There was an error!", error);
+      });
+    },
+    ACTION_EDIT_POST_DATA({ commit }, id, data) {
+      api.patch("posts/" + id, data, {
+        headers: { authorization: getAccessToken() },
+      }).then((response) => {
+        commit("SET_POST_DATA", response.data), router.push({ path: 'post/edit/' + id })
       }).catch((error) => {
         console.error("There was an error!", error);
       });
