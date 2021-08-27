@@ -4,8 +4,12 @@
         <v-container class="py-0">
             <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
             <v-btn color="white" v-if="this.$store.state.userModule.token" to="/" text>Dashboard</v-btn>
-            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage, search: search }}" text>Posts</v-btn>
-            <v-btn color="white" v-else-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage }}" text>Posts</v-btn>
+            <v-btn color="white" v-if="this.$store.state.userModule.token && this.$store.state.postsModule.search && this.$store.state.postsModule.search.length > 0" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage, search: search }}" text> <v-icon class="mr-2" aria-hidden="false"
+            >mdi-note-multiple-outline
+          </v-icon>Posts</v-btn>
+            <v-btn color="white" v-else-if="this.$store.state.userModule.token" :to="{path: '/posts', query: { page: pageQuery, perPage: perPage }}" text>          <v-icon class="mr-2" aria-hidden="false"
+            >mdi-note-multiple-outline
+          </v-icon>Posts</v-btn>
 
                    <div class="float-right">
     <v-menu 
@@ -13,11 +17,14 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="primary"
-          dark
+          color="white"
           v-bind="attrs"
           v-on="on"
+          text
         >
+          <v-icon class="mr-2" aria-hidden="false"
+            >mdi-account
+          </v-icon>
           Account
         </v-btn>
       </template>
@@ -49,7 +56,9 @@
           </v-list-item>
           <v-list-item v-else-if="this.$store.state.userModule.token">
               <v-list-item-title>
-                  <v-btn :to="{path: '/my-posts', query: { page: pageQuery, perPage: perPage }}" text>My posts</v-btn>
+                  <v-btn :to="{path: '/my-posts', query: { page: pageQuery, perPage: perPage }}" text>          <v-icon class="mr-2" aria-hidden="false"
+            >mdi-note-multiple-outline
+          </v-icon>My posts</v-btn>
               </v-list-item-title>
           </v-list-item>
       </v-list>
