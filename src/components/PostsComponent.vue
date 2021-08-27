@@ -23,15 +23,15 @@
         class="mb-2 mr-2"
         v-for="(item, index) in GET_POSTS"
         :key="index"
-      >
-        <v-card-title>
-          <span class="truncate-title">{{ item.title }}</span>
-          <v-icon v-if="item.postedBy === GET_AUTH_DATA._id"
+      >   <v-icon v-if="item.postedBy === GET_AUTH_DATA._id"
             @click="readMore(item._id)"
-            class="ml-6"
+            class="float-right ma-4"
             aria-hidden="false"
             >mdi-pencil
-          </v-icon></v-card-title
+          </v-icon>
+        <v-card-title>
+          <span class="truncate-title">{{ item.title }}</span>
+       </v-card-title
         >
 
         <v-card-text class="truncate">{{ item.description }}</v-card-text>

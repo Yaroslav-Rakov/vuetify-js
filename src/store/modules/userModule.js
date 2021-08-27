@@ -66,7 +66,7 @@ const userModule = {
               console.log('Router path from AUTH_DATA: '+router.currentRoute.path);
               if(router.currentRoute.path === '/my-posts'){
                 resolve('ACTION_POSTS');
-              } else if (router.currentRoute.path === '/post' || router.currentRoute.path === '/post/edit') {
+              } else if (router.currentRoute.path === '/post') {
                 resolve('ACTION_POST_DATA');
               }
           })

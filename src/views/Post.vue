@@ -2,7 +2,12 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="12" class="mx-auto mt-6">
-        <v-card elevation="2" outlined shaped tile>
+        <v-card elevation="2" outlined shaped tile><v-icon v-if="GET_POST_DATA.postedBy === GET_AUTH_DATA._id"
+            @click="editPost(item._id)"
+            class="float-right ma-4"
+            aria-hidden="false"
+            >mdi-pencil
+          </v-icon>
           <v-card-title>{{ GET_POST_DATA.title }}</v-card-title>
           <v-card-text>{{ GET_POST_DATA.description }}</v-card-text>
           <v-card-text>{{ GET_POST_DATA.fullText }}</v-card-text>
@@ -29,7 +34,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["GET_POST_DATA"]),
+    ...mapGetters(["GET_POST_DATA", "GET_AUTH_DATA"]),
 
     date() {
       const date = new Date(this.GET_POST_DATA.dateCreated);
