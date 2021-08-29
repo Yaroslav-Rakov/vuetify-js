@@ -28,9 +28,9 @@ export default {
     return {};
   },
   created() {
+     this.$store.dispatch("ACTION_POST_DATA", this.$route.query.id);
      this.$store.dispatch("ACTION_AUTH_DATA").then(post => { this.$store.dispatch(post, this.$route.query.id) });
      console.log('Router query from Post.vue: '+this.$route.query.id);
-  //  this.$store.dispatch("ACTION_POST_DATA", this.$route.query.id);
   },
 
   computed: {

@@ -187,9 +187,9 @@ const postsModule = {
         commit("SET_POST_DATA", response.data); 
         if(response.data.postedBy === rootState.userModule.userAuthData._id) {
           console.log('Current path from postsModule: '+router.currentRoute.path);
-          router.push({ path: 'post', query: {id: id, edit: true} })
+            router.push({ name: 'Post', params: {edit: "edit"}, query: {id: id} })
         } else {
-          router.push({ path: 'post', query: {id: id} })
+          router.push({ name: 'Post', query: {id: id} })
         }
       
       }).catch((error) => {
